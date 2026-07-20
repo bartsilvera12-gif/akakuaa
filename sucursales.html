@@ -76,27 +76,64 @@
   section.hero-suc .rule{width:80px;height:2px;background:var(--rose);margin:0 auto 22px}
   section.hero-suc .lead{font-size:18px;color:var(--text-soft);line-height:1.55}
 
+  /* ===== Rediseño: mapa ilustrado + cards laterales ===== */
   section.branches{padding:20px 20px 60px}
   section.branches .wrap{max-width:1180px;margin:0 auto}
-  .branch-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-  .branch{background:#fff;border-radius:28px;padding:28px;box-shadow:0 12px 30px -20px rgba(45,74,58,.2);display:flex;flex-direction:column;border:1px solid var(--sand);transition:transform .35s,box-shadow .35s}
-  .branch:hover{transform:translateY(-4px);box-shadow:0 22px 46px -22px rgba(45,74,58,.28)}
-  .branch .head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px}
-  .branch .pin{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px}
-  .branch .tag{padding:4px 10px;background:var(--cream-soft);border-radius:999px;font-size:11.5px;font-weight:700;color:var(--rose);letter-spacing:.1em;text-transform:uppercase}
-  .branch h3{font-size:23px;margin-bottom:14px;font-style:italic}
-  .branch .info{display:flex;flex-direction:column;gap:10px;font-size:14px;color:var(--text-soft);margin-bottom:22px;flex:1}
-  .branch .info .row{display:flex;gap:10px;align-items:flex-start}
-  .branch .info .row span.icon{color:var(--rose);flex-shrink:0}
-  .branch .actions{display:flex;gap:8px}
-  .branch .actions a{flex:1;padding:12px;border-radius:14px;font-weight:700;font-size:13px;text-align:center;transition:transform .3s,filter .3s}
-  .branch .actions a:hover{transform:translateY(-2px);filter:brightness(1.03)}
-  .branch .actions .btn-ghost{background:var(--cream-soft);color:var(--green)}
-  .branch .actions .btn-ghost:hover{color:var(--green)}
-  .branch .actions .btn-solid{background:var(--green);color:var(--cream)}
-  .branch .actions .btn-solid:hover{color:var(--cream)}
+  .suc-layout{display:grid;grid-template-columns:1.15fr 1fr;gap:32px;align-items:start}
+  @media (max-width:900px){.suc-layout{grid-template-columns:1fr;gap:24px}}
+
+  .suc-map{
+    background:linear-gradient(135deg,#eaf3ea 0%,#f7ecdd 60%,#f2d9d5 100%);
+    border-radius:28px;padding:22px;border:1px solid var(--sand);
+    box-shadow:0 12px 30px -20px rgba(45,74,58,.18);
+    position:sticky;top:96px;
+  }
+  @media (max-width:900px){.suc-map{position:static}}
+  .suc-map__inner{position:relative;aspect-ratio:1/1.05;border-radius:20px;overflow:hidden;background:#f5efe0}
+  .suc-map svg{width:100%;height:100%;display:block}
+  .suc-map__legend{margin-top:14px;font-size:12.5px;color:var(--text-soft);text-align:center;font-style:italic}
+
+  .suc-pin{
+    position:absolute;width:44px;height:44px;transform:translate(-50%,-100%);
+    cursor:pointer;transition:transform .25s;
+  }
+  .suc-pin:hover,.suc-pin.is-active{transform:translate(-50%,-105%) scale(1.12)}
+  .suc-pin svg{width:100%;height:100%;filter:drop-shadow(0 6px 8px rgba(45,74,58,.28))}
+  .suc-pin .num{
+    position:absolute;top:8px;left:50%;transform:translateX(-50%);
+    color:#fff;font-family:'Fraunces',serif;font-weight:700;font-size:16px;line-height:1;
+    pointer-events:none;
+  }
+
+  .suc-cards{display:flex;flex-direction:column;gap:16px}
+  .suc-card{
+    background:#fff;border-radius:22px;padding:22px 22px 20px;border:1px solid var(--sand);
+    box-shadow:0 10px 24px -18px rgba(45,74,58,.2);
+    transition:transform .3s,box-shadow .3s,border-color .3s;position:relative;overflow:hidden;
+    cursor:pointer;
+  }
+  .suc-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--suc-color,var(--rose));border-radius:5px 0 0 5px}
+  .suc-card:hover,.suc-card.is-active{transform:translateY(-3px);box-shadow:0 22px 40px -22px rgba(45,74,58,.28);border-color:var(--suc-color,var(--rose))}
+  .suc-card__head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+  .suc-card__num{
+    width:34px;height:34px;border-radius:50%;background:var(--suc-color,var(--rose));color:#fff;
+    display:inline-flex;align-items:center;justify-content:center;
+    font-family:'Fraunces',serif;font-weight:700;font-size:16px;flex-shrink:0;
+  }
+  .suc-card__name{flex:1;font-family:'Fraunces',serif;font-weight:700;font-size:20px;color:var(--green);font-style:italic;line-height:1.1}
+  .suc-card__tag{padding:4px 10px;background:var(--cream-soft);border-radius:999px;font-size:10.5px;font-weight:700;color:var(--suc-color,var(--rose));letter-spacing:.1em;text-transform:uppercase}
+  .suc-card__info{display:flex;flex-direction:column;gap:8px;font-size:13.5px;color:var(--text-soft);margin-bottom:16px}
+  .suc-card__info .row{display:flex;gap:9px;align-items:flex-start;line-height:1.4}
+  .suc-card__info .row svg{width:16px;height:16px;flex-shrink:0;color:var(--suc-color,var(--rose));margin-top:2px}
+  .suc-card__actions{display:flex;gap:8px}
+  .suc-card__actions a{flex:1;padding:10px;border-radius:12px;font-weight:700;font-size:12.5px;text-align:center;transition:transform .25s,filter .25s;text-decoration:none}
+  .suc-card__actions a:hover{transform:translateY(-1px);filter:brightness(1.05)}
+  .suc-card__actions .ghost{background:var(--cream-soft);color:var(--green)}
+  .suc-card__actions .ghost:hover{color:var(--green)}
+  .suc-card__actions .solid{background:var(--green);color:var(--cream)}
+  .suc-card__actions .solid:hover{color:var(--cream)}
+
   section.branches .note{font-size:13px;color:var(--text-soft);margin-top:24px;text-align:center;font-style:italic}
-  @media (max-width:900px){.branch-grid{grid-template-columns:1fr!important;max-width:480px;margin:0 auto}}
 
   section.credito{padding:20px 20px 80px}
   section.credito .wrap{max-width:1180px;margin:0 auto;background:#fff;border-radius:28px;padding:36px 40px;border:1px solid var(--sand);display:flex;gap:24px;align-items:center;flex-wrap:wrap}
@@ -165,63 +202,151 @@
 
   <section class="branches">
     <div class="wrap">
-      <div class="branch-grid">
+      <div class="suc-layout">
 
-        <article class="branch fade-up">
-          <div class="head">
-            <div class="pin" style="background:#ffe6a8;color:#c98a8a">📍</div>
-            <span class="tag">principal</span>
-          </div>
-          <h3>Sucursal Centro</h3>
-          <div class="info">
-            <div class="row"><span class="icon">📌</span><span>Dirección a confirmar</span></div>
-            <div class="row"><span class="icon">🕒</span><span>Lun a Sáb · horario a confirmar</span></div>
-            <div class="row"><span class="icon">📞</span><span>Teléfono a confirmar</span></div>
-          </div>
-          <div class="actions">
-            <a class="btn-ghost" href="#">Cómo llegar</a>
-            <a class="btn-solid" href="Akakuaa.dc.html#cta">WhatsApp</a>
-          </div>
-        </article>
+        <!-- Mapa ilustrado (SVG estático, no consume red) -->
+        <div class="suc-map fade-up">
+          <div class="suc-map__inner">
+            <svg viewBox="0 0 400 420" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <!-- fondo suave -->
+              <rect width="400" height="420" fill="#f5efe0"/>
+              <!-- manzanas -->
+              <g fill="#e8dcc4" opacity=".85">
+                <rect x="30"  y="40"  width="110" height="90"  rx="8"/>
+                <rect x="160" y="30"  width="90"  height="70"  rx="8"/>
+                <rect x="270" y="50"  width="100" height="110" rx="8"/>
+                <rect x="40"  y="160" width="90"  height="100" rx="8"/>
+                <rect x="150" y="130" width="120" height="90"  rx="8"/>
+                <rect x="290" y="190" width="90"  height="100" rx="8"/>
+                <rect x="30"  y="290" width="130" height="100" rx="8"/>
+                <rect x="180" y="250" width="100" height="140" rx="8"/>
+                <rect x="300" y="320" width="80"  height="70"  rx="8"/>
+              </g>
+              <!-- calles principales -->
+              <g stroke="#c9d7bf" stroke-width="8" opacity=".6" fill="none">
+                <line x1="0"   y1="145" x2="400" y2="145"/>
+                <line x1="0"   y1="235" x2="400" y2="235"/>
+                <line x1="145" y1="0"   x2="145" y2="420"/>
+                <line x1="285" y1="0"   x2="285" y2="420"/>
+              </g>
+              <!-- parquecito -->
+              <circle cx="80" cy="360" r="28" fill="#c9d7bf" opacity=".8"/>
+              <circle cx="72" cy="352" r="10" fill="#a5c090"/>
+              <circle cx="88" cy="365" r="8"  fill="#a5c090"/>
+              <!-- ríoazul -->
+              <path d="M0 400 Q100 380 200 405 T400 395" stroke="#9fc4d4" stroke-width="6" fill="none" opacity=".55"/>
+            </svg>
 
-        <article class="branch fade-up" style="animation-delay:.1s">
-          <div class="head">
-            <div class="pin" style="background:#c9e9f7;color:#c98a8a">📍</div>
-            <span class="tag">nueva</span>
-          </div>
-          <h3>Sucursal Norte</h3>
-          <div class="info">
-            <div class="row"><span class="icon">📌</span><span>Dirección a confirmar</span></div>
-            <div class="row"><span class="icon">🕒</span><span>Lun a Sáb · horario a confirmar</span></div>
-            <div class="row"><span class="icon">📞</span><span>Teléfono a confirmar</span></div>
-          </div>
-          <div class="actions">
-            <a class="btn-ghost" href="#">Cómo llegar</a>
-            <a class="btn-solid" href="Akakuaa.dc.html#cta">WhatsApp</a>
-          </div>
-        </article>
+            <!-- Pin 1: Centro (rosa) -->
+            <button type="button" class="suc-pin" data-target="suc-1" aria-label="Sucursal Centro" style="left:36%;top:36%;--suc-color:#c98a8a">
+              <svg viewBox="0 0 44 60" xmlns="http://www.w3.org/2000/svg"><path d="M22 2 C10 2 2 11 2 22 C2 36 22 58 22 58 C22 58 42 36 42 22 C42 11 34 2 22 2 Z" fill="#c98a8a"/><circle cx="22" cy="22" r="10" fill="#fff"/></svg>
+              <span class="num">1</span>
+            </button>
 
-        <article class="branch fade-up" style="animation-delay:.2s">
-          <div class="head">
-            <div class="pin" style="background:#ffcbb8;color:#c98a8a">📍</div>
-            <span class="tag">activa</span>
+            <!-- Pin 2: Norte (verde) -->
+            <button type="button" class="suc-pin" data-target="suc-2" aria-label="Sucursal Norte" style="left:72%;top:28%;--suc-color:#7a9863">
+              <svg viewBox="0 0 44 60" xmlns="http://www.w3.org/2000/svg"><path d="M22 2 C10 2 2 11 2 22 C2 36 22 58 22 58 C22 58 42 36 42 22 C42 11 34 2 22 2 Z" fill="#7a9863"/><circle cx="22" cy="22" r="10" fill="#fff"/></svg>
+              <span class="num">2</span>
+            </button>
+
+            <!-- Pin 3: Este (dorado) -->
+            <button type="button" class="suc-pin" data-target="suc-3" aria-label="Sucursal Este" style="left:52%;top:72%;--suc-color:#d9a84a">
+              <svg viewBox="0 0 44 60" xmlns="http://www.w3.org/2000/svg"><path d="M22 2 C10 2 2 11 2 22 C2 36 22 58 22 58 C22 58 42 36 42 22 C42 11 34 2 22 2 Z" fill="#d9a84a"/><circle cx="22" cy="22" r="10" fill="#fff"/></svg>
+              <span class="num">3</span>
+            </button>
           </div>
-          <h3>Sucursal Este</h3>
-          <div class="info">
-            <div class="row"><span class="icon">📌</span><span>Dirección a confirmar</span></div>
-            <div class="row"><span class="icon">🕒</span><span>Lun a Sáb · horario a confirmar</span></div>
-            <div class="row"><span class="icon">📞</span><span>Teléfono a confirmar</span></div>
-          </div>
-          <div class="actions">
-            <a class="btn-ghost" href="#">Cómo llegar</a>
-            <a class="btn-solid" href="Akakuaa.dc.html#cta">WhatsApp</a>
-          </div>
-        </article>
+          <div class="suc-map__legend">Ilustración de referencia · direcciones oficiales próximamente ♥</div>
+        </div>
+
+        <!-- Cards de sucursales -->
+        <div class="suc-cards">
+
+          <article class="suc-card fade-up" id="suc-1" style="--suc-color:#c98a8a">
+            <div class="suc-card__head">
+              <span class="suc-card__num">1</span>
+              <h3 class="suc-card__name">Sucursal Centro</h3>
+              <span class="suc-card__tag">principal</span>
+            </div>
+            <div class="suc-card__info">
+              <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Dirección a confirmar</span></div>
+              <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span>Lun a Sáb · horario a confirmar</span></div>
+              <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0A 0 1 22 16.92z"/></svg><span>Teléfono a confirmar</span></div>
+            </div>
+            <div class="suc-card__actions">
+              <a class="ghost" href="https://www.google.com/maps/search/Akakua%27a+centro" target="_blank" rel="noopener">Cómo llegar</a>
+              <a class="solid" href="Akakuaa.dc.html#cta">WhatsApp</a>
+            </div>
+          </article>
+
+          <article class="suc-card fade-up" id="suc-2" style="animation-delay:.08s;--suc-color:#7a9863">
+            <div class="suc-card__head">
+              <span class="suc-card__num">2</span>
+              <h3 class="suc-card__name">Sucursal Norte</h3>
+              <span class="suc-card__tag">nueva</span>
+            </div>
+            <div class="suc-card__info">
+              <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Dirección a confirmar</span></div>
+              <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span>Lun a Sáb · horario a confirmar</span></div>
+              <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>Teléfono a confirmar</span></div>
+            </div>
+            <div class="suc-card__actions">
+              <a class="ghost" href="https://www.google.com/maps/search/Akakua%27a+norte" target="_blank" rel="noopener">Cómo llegar</a>
+              <a class="solid" href="Akakuaa.dc.html#cta">WhatsApp</a>
+            </div>
+          </article>
+
+          <article class="suc-card fade-up" id="suc-3" style="animation-delay:.16s;--suc-color:#d9a84a">
+            <div class="suc-card__head">
+              <span class="suc-card__num">3</span>
+              <h3 class="suc-card__name">Sucursal Este</h3>
+              <span class="suc-card__tag">activa</span>
+            </div>
+            <div class="suc-card__info">
+              <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Dirección a confirmar</span></div>
+              <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span>Lun a Sáb · horario a confirmar</span></div>
+              <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>Teléfono a confirmar</span></div>
+            </div>
+            <div class="suc-card__actions">
+              <a class="ghost" href="https://www.google.com/maps/search/Akakua%27a+este" target="_blank" rel="noopener">Cómo llegar</a>
+              <a class="solid" href="Akakuaa.dc.html#cta">WhatsApp</a>
+            </div>
+          </article>
+
+        </div>
 
       </div>
       <p class="note">Datos provisionales · a completar cuando la marca confirme direcciones y horarios oficiales.</p>
     </div>
   </section>
+
+  <script>
+  (function(){
+    var pins  = document.querySelectorAll('.suc-pin');
+    var cards = document.querySelectorAll('.suc-card');
+    function setActive(id){
+      pins.forEach(function(p){ p.classList.toggle('is-active', p.dataset.target === id); });
+      cards.forEach(function(c){ c.classList.toggle('is-active', c.id === id); });
+    }
+    function clearActive(){
+      pins.forEach(function(p){ p.classList.remove('is-active'); });
+      cards.forEach(function(c){ c.classList.remove('is-active'); });
+    }
+    pins.forEach(function(p){
+      p.addEventListener('mouseenter', function(){ setActive(p.dataset.target); });
+      p.addEventListener('mouseleave', clearActive);
+      p.addEventListener('click', function(){
+        var card = document.getElementById(p.dataset.target);
+        if(card) card.scrollIntoView({ behavior:'smooth', block:'center' });
+        setActive(p.dataset.target);
+        setTimeout(clearActive, 2500);
+      });
+    });
+    cards.forEach(function(c){
+      c.addEventListener('mouseenter', function(){ setActive(c.id); });
+      c.addEventListener('mouseleave', clearActive);
+    });
+  })();
+  </script>
 
   <section class="credito">
     <div class="wrap">
