@@ -1515,7 +1515,8 @@
           v.setAttribute('muted','');
           v.setAttribute('playsinline','');
           v.setAttribute('webkit-playsinline','');
-          v.setAttribute('preload','auto');
+          v.setAttribute('preload','metadata');
+          v.preload = 'metadata';
           v.setAttribute('aria-hidden','true');
           v.tabIndex = -1;
           a.appendChild(v);
@@ -1689,6 +1690,7 @@
           entries.forEach(function(en){
             var v = en.target;
             if(en.isIntersecting){
+              if(v.preload !== 'auto'){ v.preload = 'auto'; v.setAttribute('preload','auto'); }
               if(v.paused){
                 v.muted = true;
                 var p = v.play();
@@ -1703,7 +1705,7 @@
               }
             }
           });
-        }, { threshold: 0.15 }) : null;
+        }, { threshold: 0.15, rootMargin: '0px 300px 0px 300px' }) : null;
 
         function observeAll(){
           if(!io) return;
