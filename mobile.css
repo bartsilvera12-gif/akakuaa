@@ -161,32 +161,37 @@ p, h1, h2, h3, h4, a, span, div, li{overflow-wrap:break-word;word-wrap:break-wor
 @media (max-width:720px){
   .perchero-box{
     background:transparent;
-    display:grid!important;
-    grid-template-columns:repeat(2,1fr)!important;
-    gap:12px!important;
+    display:flex!important;
+    flex-direction:column!important;
+    gap:8px!important;
     padding:8px 14px 8px!important;
     max-width:520px;margin:0 auto;
   }
   .perchero-img{display:none!important}
-  /* display:contents hace que viewport/track no generen caja
-     y sus hijos participan en la grilla del perchero-box */
   .perchero-viewport,.perchero-track{
     display:contents!important;
   }
+  /* Card horizontal: icono a la izq, texto a la der, chevron al final */
   .prenda,.prenda-fija{
     position:relative!important;
     left:auto!important;right:auto!important;bottom:auto!important;top:auto!important;
     transform:none!important;
     width:100%!important;height:auto!important;min-width:0!important;
     margin:0!important;
-    background:#fff!important;
-    border-radius:18px!important;
-    padding:16px 10px 14px!important;
-    box-shadow:0 10px 24px -14px rgba(45,74,58,.35);
-    border:1px solid rgba(228,181,176,.35);
-    flex-direction:column!important;
+    background-color:#fff!important;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23c98a8a' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'><polyline points='9 18 15 12 9 6'/></svg>")!important;
+    background-repeat:no-repeat!important;
+    background-position:right 14px center!important;
+    background-size:14px 14px!important;
+    border-radius:14px!important;
+    padding:10px 34px 10px 10px!important;
+    box-shadow:0 6px 18px -12px rgba(45,74,58,.28);
+    border:1px solid rgba(228,181,176,.28);
+    flex-direction:row!important;
     align-items:center!important;
     justify-content:flex-start!important;
+    gap:14px!important;
+    text-align:left!important;
     animation:none!important;
   }
   .prenda:hover,.prenda:focus-visible,.prenda.is-active,
@@ -194,43 +199,41 @@ p, h1, h2, h3, h4, a, span, div, li{overflow-wrap:break-word;word-wrap:break-wor
     transform:none!important;filter:none!important;
   }
   .prenda-item{
-    width:90px!important;height:90px!important;max-width:90px!important;
+    width:56px!important;height:56px!important;max-width:56px!important;
     object-fit:contain!important;
     filter:none!important;
-    margin:0 auto 10px!important;
+    margin:0!important;
     transform:none!important;
     animation:none!important;
     position:static!important;
     display:block!important;
+    flex-shrink:0!important;
+    background:linear-gradient(135deg,var(--rose-pale,#f2d9d5),var(--sand,#e8dcc4))!important;
+    border-radius:12px!important;
+    padding:6px!important;
   }
   .prenda:hover .prenda-item,.prenda:focus-visible .prenda-item,.prenda.is-active .prenda-item,
   .prenda-fija:hover .prenda-item,.prenda-fija:focus-visible .prenda-item,.prenda-fija.is-active .prenda-item{
     transform:none!important;animation:none!important;filter:none!important;
   }
-  /* Card flotante en móvil: la degradamos a etiqueta debajo del ícono */
   .prenda-card{
     position:static!important;
     opacity:1!important;visibility:visible!important;pointer-events:auto!important;
     transform:none!important;
     background:transparent!important;box-shadow:none!important;border:none!important;
-    padding:0!important;width:100%!important;
-    align-items:center!important;text-align:center!important;
-    gap:4px!important;
+    padding:0!important;width:auto!important;flex:1 1 auto!important;min-width:0!important;
+    align-items:flex-start!important;text-align:left!important;
+    gap:2px!important;
   }
   .prenda-card__chip,.prenda-card__avail,.prenda-card__cta{display:none!important}
-  .prenda-card__title{font-size:14px!important;line-height:1.15!important;text-align:center;color:var(--green)}
-  .prenda-card__cat{font-size:11px!important;text-align:center;color:var(--text-soft)}
-  /* Ocultar flechas y controles del perchero en móvil */
+  .prenda-card__title{font-size:15px!important;line-height:1.2!important;color:var(--green);margin:0!important;text-align:left!important}
+  .prenda-card__cat{font-size:12px!important;color:var(--text-soft);margin:0!important;letter-spacing:.02em;text-align:left!important}
   .perchero-arrow,.perchero-controls{display:none!important}
-  /* Placeholder si no hay imagen: círculo neutro más chico */
-  .prenda-item.is-placeholder{min-height:0!important;width:80px!important;height:80px!important;border-radius:50%!important}
-  /* Hay 11 items totales (2 col = último queda solo en su fila).
-     Centramos el último .prenda-fija spanneando las 2 columnas. */
+  .prenda-item.is-placeholder{min-height:0!important;width:56px!important;height:56px!important;border-radius:12px!important}
+  /* Reset: en la lista vertical el último no necesita centrado especial */
   .perchero-box > .prenda-fija:last-of-type{
-    grid-column:1 / -1!important;
-    justify-self:center!important;
-    width:calc(50% - 6px)!important;
-    max-width:180px!important;
+    grid-column:auto!important;justify-self:auto!important;
+    width:100%!important;max-width:100%!important;
   }
 
   /* Sección esencia: imágenes decorativas rotas → ocultar */
