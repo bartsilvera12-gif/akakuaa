@@ -70,35 +70,82 @@
   .breadcrumb a{color:var(--text-soft);font-weight:600}
   .breadcrumb a:hover{color:var(--rose)}
 
-  section.hero-faq{padding:60px 20px 40px;text-align:center;max-width:800px;margin:0 auto;position:relative}
-  section.hero-faq h1{font-size:clamp(44px,5.5vw,72px);line-height:1;margin-bottom:18px}
-  section.hero-faq h1 em{font-style:italic;color:var(--rose)}
-  section.hero-faq .rule{width:80px;height:2px;background:var(--rose);margin:0 auto 22px}
-  section.hero-faq .lead{font-size:18px;color:var(--text-soft);line-height:1.55}
-
-  section.faq-list{padding:20px 20px 80px;position:relative}
-  section.faq-list .wrap{max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
-  details.q{
-    background:#fff;border-radius:24px;padding:6px;
-    box-shadow:0 12px 32px -20px rgba(45,74,58,.2);
-    border:1px solid var(--sand);overflow:hidden;
-    transition:box-shadow .3s,transform .3s;
+  /* ========= HERO REDISEÑADO ========= */
+  section.hero-faq{
+    padding:48px 24px 20px;max-width:900px;margin:0 auto;position:relative;text-align:center;
   }
-  details.q[open]{box-shadow:0 18px 40px -20px rgba(45,74,58,.25);transform:translateY(-2px)}
+  section.hero-faq .badge{
+    display:inline-flex;align-items:center;gap:8px;padding:6px 14px;
+    background:#fff;border-radius:999px;
+    font-size:11.5px;font-weight:800;color:var(--rose);
+    letter-spacing:.2em;text-transform:uppercase;
+    box-shadow:0 6px 18px -8px rgba(45,74,58,.18);
+    margin-bottom:22px;
+  }
+  section.hero-faq .badge svg{width:14px;height:14px}
+  section.hero-faq h1{font-size:clamp(38px,5vw,60px);line-height:1.02;margin-bottom:14px}
+  section.hero-faq h1 em{font-style:italic;color:var(--rose)}
+  section.hero-faq .rule{width:60px;height:2px;background:var(--rose);margin:0 auto 18px}
+  section.hero-faq .lead{font-size:16px;color:var(--text-soft);line-height:1.55;max-width:560px;margin:0 auto}
+  section.hero-faq .lead a{font-weight:700}
+
+  /* Buscador */
+  section.faq-search{padding:14px 20px 0;max-width:900px;margin:0 auto}
+  .faq-search-box{
+    position:relative;background:#fff;border-radius:16px;
+    box-shadow:0 10px 26px -18px rgba(45,74,58,.28);
+    border:1px solid var(--sand);
+  }
+  .faq-search-box input{
+    width:100%;padding:14px 18px 14px 46px;border:none;background:transparent;
+    font-family:inherit;font-size:15px;color:var(--text);border-radius:16px;outline:none;
+  }
+  .faq-search-box input::placeholder{color:var(--text-soft);opacity:.8}
+  .faq-search-box svg{
+    position:absolute;left:16px;top:50%;transform:translateY(-50%);
+    width:18px;height:18px;color:var(--text-soft);pointer-events:none;
+  }
+  .faq-search-box:focus-within{border-color:var(--rose-soft);box-shadow:0 10px 26px -16px rgba(201,138,138,.35)}
+
+  /* ========= LISTA POR CATEGORÍAS ========= */
+  section.faq-list{padding:20px 20px 60px;position:relative}
+  section.faq-list .wrap{max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:32px}
+  .faq-cat{display:flex;flex-direction:column;gap:8px}
+  .faq-cat__title{
+    display:flex;align-items:center;gap:10px;
+    font-family:'Fraunces',serif;font-weight:600;font-style:italic;
+    color:var(--green);font-size:20px;padding:0 4px 4px;
+  }
+  .faq-cat__title .dot{
+    width:26px;height:26px;border-radius:50%;background:var(--rose-pale);
+    color:var(--rose);display:inline-flex;align-items:center;justify-content:center;
+  }
+  .faq-cat__title .dot svg{width:14px;height:14px}
+  .faq-cat__group{display:flex;flex-direction:column;gap:8px}
+  details.q{
+    background:#fff;border-radius:16px;padding:0;
+    box-shadow:0 6px 18px -12px rgba(45,74,58,.16);
+    border:1px solid var(--sand);overflow:hidden;
+    transition:box-shadow .25s,border-color .25s;
+  }
+  details.q[open]{box-shadow:0 12px 28px -16px rgba(45,74,58,.22);border-color:var(--rose-pale)}
   details.q summary{
-    padding:22px 26px;display:flex;justify-content:space-between;align-items:center;gap:16px;
-    font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--green);font-style:italic;
-    cursor:pointer;list-style:none;
+    padding:16px 20px;display:flex;justify-content:space-between;align-items:center;gap:14px;
+    font-family:'Fraunces',serif;font-weight:600;font-size:15.5px;color:var(--green);font-style:italic;
+    cursor:pointer;list-style:none;line-height:1.3;
   }
   details.q summary::-webkit-details-marker{display:none}
   details.q summary .plus{
-    width:34px;height:34px;flex-shrink:0;border-radius:50%;
+    width:26px;height:26px;flex-shrink:0;border-radius:50%;
     background:var(--rose-pale);display:inline-flex;align-items:center;justify-content:center;
-    font-size:20px;color:var(--rose);font-weight:600;
-    transition:transform .3s,background .3s;
+    font-size:16px;color:var(--rose);font-weight:700;line-height:1;
+    transition:transform .25s,background .25s;
   }
   details.q[open] summary .plus{transform:rotate(45deg);background:var(--rose);color:#fff}
-  details.q .answer{padding:6px 26px 24px;font-size:15px;line-height:1.65;color:var(--text)}
+  details.q .answer{padding:0 20px 18px;font-size:14.5px;line-height:1.6;color:var(--text)}
+  details.q.hide{display:none}
+  .faq-empty{text-align:center;padding:40px 20px;color:var(--text-soft);font-size:14.5px}
+  .faq-empty strong{color:var(--green);font-family:'Fraunces',serif;font-style:italic;display:block;margin-bottom:6px;font-size:17px}
 
   section.cta{padding:20px 20px 80px}
   section.cta .wrap{max-width:900px;margin:0 auto;background:linear-gradient(135deg,var(--green),var(--green-soft));border-radius:32px;padding:56px 40px;text-align:center;color:var(--cream);position:relative;overflow:hidden}
@@ -150,52 +197,120 @@
   </div>
 
   <section class="hero-faq fade-up">
-    <!-- Decoraciones alegres -->
-    <svg class="kid-decor star" viewBox="0 0 24 24" style="top:20px;left:10%;width:30px" fill="#ffd76b"><path d="M12 1l2.9 7.4L23 9.2l-6 5.3L18.7 23 12 18.8 5.3 23 7 14.5 1 9.2l8.1-.8L12 1z"/></svg>
-    <svg class="kid-decor heart" viewBox="0 0 24 24" style="top:50px;right:12%;width:28px" fill="#c98a8a"><path d="M12 21s-7-5.5-9-10a5 5 0 0 1 9-3 5 5 0 0 1 9 3c-2 4.5-9 10-9 10z"/></svg>
-    <svg class="kid-decor balloon" viewBox="0 0 40 60" style="top:0;right:5%;width:44px"><ellipse cx="20" cy="22" rx="16" ry="20" fill="#c9d7bf"/><ellipse cx="14" cy="14" rx="4" ry="6" fill="rgba(255,255,255,.5)"/><path d="M18 42 L20 46 L22 42 Z" fill="#c9d7bf"/><path d="M20 46 Q22 53 18 60" stroke="#8a6a4a" stroke-width="1" fill="none"/></svg>
-    <svg class="kid-decor star-spin" viewBox="0 0 24 24" style="bottom:-10px;left:6%;width:28px" fill="#f0a878"><path d="M12 1l2.9 7.4L23 9.2l-6 5.3L18.7 23 12 18.8 5.3 23 7 14.5 1 9.2l8.1-.8L12 1z"/></svg>
+    <div class="badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+      Todo lo que preguntan
+    </div>
     <h1>Preguntas <em>frecuentes</em></h1>
     <div class="rule"></div>
-    <p class="lead">Lo que las familias suelen preguntarnos. Si tenés otra duda, <a href="Akakuaa.dc.html#cta" style="font-weight:700">escribinos por WhatsApp</a>. <span style="color:var(--rose)">♥</span></p>
+    <p class="lead">Lo que las familias suelen preguntarnos. Si tenés otra duda, <a href="Akakuaa.dc.html#cta">escribinos por WhatsApp</a>.</p>
+  </section>
+
+  <section class="faq-search fade-up">
+    <div class="faq-search-box">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="search" id="faqSearch" placeholder="Buscar una pregunta (ej. crédito, edad, sucursal)" aria-label="Buscar en preguntas frecuentes">
+    </div>
   </section>
 
   <section class="faq-list">
-    <div class="wrap">
-      <details class="q">
-        <summary>¿Qué tipo de productos reciben?<span class="plus">+</span></summary>
-        <div class="answer">Ropa, calzados y accesorios infantiles (incluye bodys, mochilas, gorros, bufandas y demás) en buen estado.</div>
-      </details>
-      <details class="q">
-        <summary>¿Hasta qué edad reciben ropa?<span class="plus">+</span></summary>
-        <div class="answer">Recibimos productos infantiles hasta los 16 años.</div>
-      </details>
-      <details class="q">
-        <summary>¿Cómo se evalúan los artículos?<span class="plus">+</span></summary>
-        <div class="answer">El equipo de Akakua'a revisa cada artículo y define su ingreso a la tienda. Los criterios específicos serán publicados en la política oficial.</div>
-      </details>
-      <details class="q">
-        <summary>¿Puedo vender y comprar en la misma visita?<span class="plus">+</span></summary>
-        <div class="answer">Sí. Podés realizar ambas operaciones en una misma visita y usar el valor recibido como crédito al instante.</div>
-      </details>
-      <details class="q">
-        <summary>¿Cómo funcionan los créditos?<span class="plus">+</span></summary>
-        <div class="answer">Al vender productos podés recibir el valor correspondiente o guardarlo como crédito a favor para usarlo en cualquier sucursal.</div>
-      </details>
-      <details class="q">
-        <summary>¿Puedo utilizar mi crédito en otra sucursal?<span class="plus">+</span></summary>
-        <div class="answer">Sí. Tu crédito e historial están disponibles en todas las sucursales de Akakua'a.</div>
-      </details>
-      <details class="q">
-        <summary>¿Todos los productos tienen el mismo precio?<span class="plus">+</span></summary>
-        <div class="answer">No. Cada categoría tiene un precio de venta establecido, pero no hay un precio diferente por prenda individual.</div>
-      </details>
-      <details class="q">
-        <summary>¿Cómo consulto la disponibilidad de un producto?<span class="plus">+</span></summary>
-        <div class="answer">Podés escribirnos por WhatsApp y te confirmamos disponibilidad en la sucursal más cercana.</div>
-      </details>
+    <div class="wrap" id="faqWrap">
+
+      <!-- Categoría: Qué recibimos -->
+      <div class="faq-cat">
+        <div class="faq-cat__title">
+          <span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8v13H3V8"/><path d="M1 3h22v5H1z"/><path d="M10 12h4"/></svg></span>
+          Qué recibimos
+        </div>
+        <div class="faq-cat__group">
+          <details class="q">
+            <summary>¿Qué tipo de productos reciben?<span class="plus">+</span></summary>
+            <div class="answer">Ropa, calzados y accesorios infantiles (incluye bodys, mochilas, gorros, bufandas y demás) en buen estado.</div>
+          </details>
+          <details class="q">
+            <summary>¿Hasta qué edad reciben ropa?<span class="plus">+</span></summary>
+            <div class="answer">Recibimos productos infantiles hasta los 16 años.</div>
+          </details>
+          <details class="q">
+            <summary>¿Cómo se evalúan los artículos?<span class="plus">+</span></summary>
+            <div class="answer">El equipo de Akakua'a revisa cada artículo y define su ingreso a la tienda. Los criterios específicos serán publicados en la política oficial.</div>
+          </details>
+        </div>
+      </div>
+
+      <!-- Categoría: Comprar y vender -->
+      <div class="faq-cat">
+        <div class="faq-cat__title">
+          <span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></span>
+          Comprar y vender
+        </div>
+        <div class="faq-cat__group">
+          <details class="q">
+            <summary>¿Puedo vender y comprar en la misma visita?<span class="plus">+</span></summary>
+            <div class="answer">Sí. Podés realizar ambas operaciones en una misma visita y usar el valor recibido como crédito al instante.</div>
+          </details>
+          <details class="q">
+            <summary>¿Todos los productos tienen el mismo precio?<span class="plus">+</span></summary>
+            <div class="answer">No. Cada categoría tiene un precio de venta establecido, pero no hay un precio diferente por prenda individual.</div>
+          </details>
+          <details class="q">
+            <summary>¿Cómo consulto la disponibilidad de un producto?<span class="plus">+</span></summary>
+            <div class="answer">Podés escribirnos por WhatsApp y te confirmamos disponibilidad en la sucursal más cercana.</div>
+          </details>
+        </div>
+      </div>
+
+      <!-- Categoría: Créditos -->
+      <div class="faq-cat">
+        <div class="faq-cat__title">
+          <span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></span>
+          Créditos
+        </div>
+        <div class="faq-cat__group">
+          <details class="q">
+            <summary>¿Cómo funcionan los créditos?<span class="plus">+</span></summary>
+            <div class="answer">Al vender productos podés recibir el valor correspondiente o guardarlo como crédito a favor para usarlo en cualquier sucursal.</div>
+          </details>
+          <details class="q">
+            <summary>¿Puedo utilizar mi crédito en otra sucursal?<span class="plus">+</span></summary>
+            <div class="answer">Sí. Tu crédito e historial están disponibles en todas las sucursales de Akakua'a.</div>
+          </details>
+        </div>
+      </div>
+
+      <div class="faq-empty" id="faqEmpty" style="display:none">
+        <strong>Sin resultados</strong>
+        No encontramos preguntas que coincidan. Probá con otras palabras.
+      </div>
     </div>
   </section>
+
+  <script>
+    (function(){
+      var input = document.getElementById('faqSearch');
+      var wrap = document.getElementById('faqWrap');
+      var empty = document.getElementById('faqEmpty');
+      if(!input || !wrap) return;
+      var items = Array.prototype.slice.call(wrap.querySelectorAll('details.q'));
+      var cats = Array.prototype.slice.call(wrap.querySelectorAll('.faq-cat'));
+      function norm(s){return (s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'')}
+      input.addEventListener('input', function(){
+        var q = norm(input.value.trim());
+        var anyVisible = false;
+        items.forEach(function(it){
+          var text = norm(it.textContent);
+          var match = !q || text.indexOf(q) !== -1;
+          it.classList.toggle('hide', !match);
+          if(match) anyVisible = true;
+        });
+        cats.forEach(function(c){
+          var visible = Array.prototype.slice.call(c.querySelectorAll('details.q')).some(function(d){return !d.classList.contains('hide')});
+          c.style.display = visible ? '' : 'none';
+        });
+        empty.style.display = anyVisible ? 'none' : 'block';
+      });
+    })();
+  </script>
 
   <section class="cta">
     <div class="wrap">

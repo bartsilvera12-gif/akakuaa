@@ -210,6 +210,19 @@ p, h1, h2, h3, h4, a, span, div, li{overflow-wrap:break-word;word-wrap:break-wor
   img[src*="public/esencia/"]{max-width:80px}
 }
 
+/* Hero homepage — reencuadrar la foto en móvil para que los niños
+   no queden tapados por el texto/CTA. Movemos el foco hacia la
+   parte baja-derecha de la imagen (donde hay césped y aire). */
+@media (max-width:820px){
+  section#inicio[data-parallax="true"]{
+    background-position:82% 100%, 82% 100%!important;
+    background-size:cover,cover!important;
+    min-height:auto!important;
+  }
+  section#inicio .hero-grid{min-height:auto!important;padding:20px 0 320px!important}
+  section#inicio .hero-text{padding:24px 20px 8px!important}
+}
+
 /* Cinta métrica (sección esencia) — monito más grande en móvil */
 @media (max-width:640px){
   .mono-wrap{width:32%!important;left:34%!important}
