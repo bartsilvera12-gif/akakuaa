@@ -326,21 +326,35 @@ p, h1, h2, h3, h4, a, span, div, li{overflow-wrap:break-word;word-wrap:break-wor
 }
 
 /* ============================================================
-   Puntitos del carrusel de tesoros: darles mejor look
+   Puntitos del carrusel de tesoros: círculos pequeños uniformes
    ============================================================ */
 @media (max-width:640px){
-  .tesoros-dots{gap:6px!important;margin-top:4px}
+  .tesoros-dots{gap:8px!important;margin-top:4px;align-items:center}
   .tesoros-dot{
     width:8px!important;height:8px!important;
-    background:rgba(45,74,58,.22)!important;
-    transition:width .25s,background .25s!important;
+    min-width:8px!important;min-height:8px!important;
+    border-radius:50%!important;
+    background:rgba(45,74,58,.25)!important;
+    transform:none!important;
+    padding:0!important;
+    display:inline-block!important;
+    flex:0 0 8px!important;
+    line-height:0!important;
+    font-size:0!important;
   }
   .tesoros-dot.is-active{
-    width:22px!important;
-    border-radius:999px!important;
     background:var(--rose)!important;
     transform:none!important;
+    width:8px!important;height:8px!important;
   }
-  /* Si son muchos, escondemos: el swipe alcanza */
-  .tesoros-dots:has(> :nth-child(8)){display:none!important}
+}
+
+/* ============================================================
+   Ocultar SVG decorativos de plantas / ramas / olivos en móvil.
+   En pantallas chicas quedan como manchas raras.
+   ============================================================ */
+@media (max-width:820px){
+  .cierre-rama,
+  .vision-plant,
+  .cv-doodle--3{display:none!important}
 }
