@@ -224,6 +224,14 @@ p, h1, h2, h3, h4, a, span, div, li{overflow-wrap:break-word;word-wrap:break-wor
   .perchero-arrow,.perchero-controls{display:none!important}
   /* Placeholder si no hay imagen: círculo neutro más chico */
   .prenda-item.is-placeholder{min-height:0!important;width:80px!important;height:80px!important;border-radius:50%!important}
+  /* Hay 11 items totales (2 col = último queda solo en su fila).
+     Centramos el último .prenda-fija spanneando las 2 columnas. */
+  .perchero-box > .prenda-fija:last-of-type{
+    grid-column:1 / -1!important;
+    justify-self:center!important;
+    width:calc(50% - 6px)!important;
+    max-width:180px!important;
+  }
 
   /* Sección esencia: imágenes decorativas rotas → ocultar */
   img[src*="public/esencia/"]{max-width:80px}
