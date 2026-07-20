@@ -1,7 +1,50 @@
 /* mobile.js — inyecta botón hamburguesa + drawer en subpáginas
-   que usan <header class="site"> con un <nav> interno. */
+   que usan <header class="site"> con un <nav> interno.
+   También activa el botón hamburguesa del homepage cuyo onClick
+   depende del runtime DC que no siempre está inicializado. */
 (function(){
+  function initHomepageHamburger(){
+    var btn = document.querySelector('header.site-header .mobile-btn');
+    if(!btn) return;
+    var nav = document.querySelector('header.site-header .desktop-nav');
+    if(!nav) return;
+    // Crear drawer si no existe
+    var header = btn.closest('header');
+    var drawer = header.querySelector('.mobile-drawer-home');
+    if(!drawer){
+      drawer = document.createElement('div');
+      drawer.className = 'mobile-drawer mobile-drawer-home';
+      drawer.style.position = 'absolute';
+      drawer.style.left = '12px';
+      drawer.style.right = '12px';
+      drawer.style.top = 'calc(100% - 4px)';
+      Array.prototype.forEach.call(nav.querySelectorAll('a'), function(a){
+        var link = document.createElement('a');
+        link.href = a.getAttribute('href');
+        link.textContent = a.textContent.trim();
+        link.addEventListener('click', function(){ drawer.classList.remove('is-open'); btn.setAttribute('aria-expanded','false'); });
+        drawer.appendChild(link);
+      });
+      header.appendChild(drawer);
+    }
+    // Reemplazar el onClick DC roto por un handler funcional
+    btn.setAttribute('onclick','');
+    btn.onclick = null;
+    btn.addEventListener('click', function(e){
+      e.preventDefault();e.stopPropagation();
+      var open = drawer.classList.toggle('is-open');
+      btn.setAttribute('aria-expanded', open?'true':'false');
+    });
+    document.addEventListener('click', function(e){
+      if(!drawer.classList.contains('is-open')) return;
+      if(header.contains(e.target)) return;
+      drawer.classList.remove('is-open');
+      btn.setAttribute('aria-expanded','false');
+    });
+  }
+
   function init(){
+    initHomepageHamburger();
     var header = document.querySelector('header.site');
     if(!header) return;
     var wrap = header.querySelector('.wrap') || header.firstElementChild;
@@ -57,4 +100,8 @@
   }
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
+  // El runtime DC re-renderiza el header más tarde: reintentamos
+  setTimeout(init, 400);
+  setTimeout(init, 1200);
+  setTimeout(init, 2500);
 })();
