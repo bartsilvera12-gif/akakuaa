@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/", "destination": "/Akakuaa.dc.html" }
+  ],
+  "cleanUrls": true
+}
