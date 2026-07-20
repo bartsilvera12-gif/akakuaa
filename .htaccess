@@ -1,0 +1,99 @@
+# ==========================================================================
+# Akakua'a — configuracion Apache para Hostinger (sitio estatico)
+# ==========================================================================
+
+# --- Documento por defecto ---------------------------------------------------
+# index.html existe y redirige a Akakuaa.dc.html
+DirectoryIndex index.html Akakuaa.dc.html
+
+# --- Forzar HTTPS ------------------------------------------------------------
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  # HTTPS
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # Sin www -> con www (opcional, descomentar si preferis www)
+  # RewriteCond %{HTTP_HOST} ^([^.]+\.[^.]+)$ [NC]
+  # RewriteRule ^ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+# --- MIME types --------------------------------------------------------------
+<IfModule mod_mime.c>
+  AddType video/mp4                          .mp4 .m4v
+  AddType image/webp                         .webp
+  AddType image/svg+xml                      .svg .svgz
+  AddType application/manifest+json          .webmanifest
+  AddType font/woff2                         .woff2
+  AddType text/cache-manifest                .appcache
+</IfModule>
+
+# --- Compresion (gzip / deflate) --------------------------------------------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml text/javascript
+  AddOutputFilterByType DEFLATE application/javascript application/x-javascript application/json
+  AddOutputFilterByType DEFLATE application/xml application/rss+xml application/atom+xml
+  AddOutputFilterByType DEFLATE image/svg+xml font/woff2 font/otf font/ttf
+</IfModule>
+
+# --- Cache headers (mod_expires) --------------------------------------------
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault                              "access plus 1 month"
+
+  # HTML: no cachear (para que los cambios se vean rapido)
+  ExpiresByType text/html                     "access plus 0 seconds"
+
+  # CSS/JS: 1 semana
+  ExpiresByType text/css                      "access plus 1 week"
+  ExpiresByType application/javascript        "access plus 1 week"
+  ExpiresByType text/javascript               "access plus 1 week"
+
+  # Imagenes: 1 mes
+  ExpiresByType image/jpeg                    "access plus 1 month"
+  ExpiresByType image/png                     "access plus 1 month"
+  ExpiresByType image/webp                    "access plus 1 month"
+  ExpiresByType image/svg+xml                 "access plus 1 month"
+  ExpiresByType image/x-icon                  "access plus 1 month"
+
+  # Video: 1 mes
+  ExpiresByType video/mp4                     "access plus 1 month"
+
+  # Fuentes: 1 anio
+  ExpiresByType font/woff2                    "access plus 1 year"
+  ExpiresByType font/woff                     "access plus 1 year"
+</IfModule>
+
+# --- Cache-Control (alternativa mas moderna) --------------------------------
+<IfModule mod_headers.c>
+  <FilesMatch "\.(html)$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+  <FilesMatch "\.(css|js)$">
+    Header set Cache-Control "public, max-age=604800"
+  </FilesMatch>
+  <FilesMatch "\.(jpg|jpeg|png|webp|gif|svg|ico|mp4|webm|woff2)$">
+    Header set Cache-Control "public, max-age=2592000, immutable"
+  </FilesMatch>
+
+  # --- Seguridad -------------------------------------------------------------
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  Header set Permissions-Policy "geolocation=(), camera=(), microphone=()"
+</IfModule>
+
+# --- Pagina 404 personalizada (opcional) ------------------------------------
+# ErrorDocument 404 /404.html
+
+# --- Bloquear acceso a archivos sensibles -----------------------------------
+<FilesMatch "^\.">
+  Require all denied
+</FilesMatch>
+<FilesMatch "(\.md|\.json|vercel\.json)$">
+  Require all denied
+</FilesMatch>
+
+# --- Sin listado de directorios ---------------------------------------------
+Options -Indexes
