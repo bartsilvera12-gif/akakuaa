@@ -1,0 +1,134 @@
+/* ============================================================
+   mobile.css — ajustes responsive globales para Akakua'a
+   Se carga en todas las páginas y sólo aplica en pantallas
+   pequeñas mediante media queries.
+   ============================================================ */
+
+/* --- Seguridad de overflow global ---------------------------- */
+html, body { max-width: 100%; overflow-x: hidden; }
+img, video, svg { max-width: 100%; }
+
+/* --- Header sub-páginas: botón hamburguesa ------------------- */
+.mobile-menu-btn{
+  display:none;
+  width:44px;height:44px;border-radius:14px;background:#fff;
+  border:1px solid rgba(45,74,58,.12);
+  box-shadow:0 4px 14px -6px rgba(43,35,64,.2);
+  align-items:center;justify-content:center;
+  cursor:pointer;flex-shrink:0;padding:0;
+}
+.mobile-menu-btn span{
+  display:block;width:20px;height:2.5px;background:#2b2340;border-radius:2px;
+  position:relative;transition:transform .25s, opacity .2s;
+}
+.mobile-menu-btn span + span{margin-top:4px}
+.mobile-menu-btn[aria-expanded="true"] span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.mobile-menu-btn[aria-expanded="true"] span:nth-child(2){opacity:0}
+.mobile-menu-btn[aria-expanded="true"] span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+
+.mobile-drawer{
+  display:none;
+  position:absolute;left:12px;right:12px;top:calc(100% + 6px);
+  background:#fff;border-radius:20px;padding:12px;
+  box-shadow:0 20px 50px -20px rgba(45,74,58,.35);
+  flex-direction:column;gap:2px;z-index:60;
+}
+.mobile-drawer.is-open{display:flex}
+.mobile-drawer a{
+  padding:12px 16px;border-radius:12px;color:var(--green);
+  font-weight:600;font-size:15px;text-decoration:none;
+}
+.mobile-drawer a.active,.mobile-drawer a:hover{background:var(--rose-pale);color:var(--rose)}
+
+/* --- Breakpoints -------------------------------------------- */
+@media (max-width:960px){
+  /* Mostrar botón hamburguesa en las subpáginas */
+  header.site .mobile-menu-btn{display:inline-flex}
+  header.site{position:relative}
+  header.site .wrap{gap:12px}
+  /* Ocultar CTA "Escribinos" del header en móviles */
+  header.site .cta{display:none}
+}
+
+@media (max-width:820px){
+  /* Subpáginas: reducir padding en secciones anchas */
+  section.hero,
+  section.filters,
+  section.catalog,
+  section.pricing-note,
+  section.cta,
+  section.contenido{padding-left:18px!important;padding-right:18px!important}
+
+  /* Historia / grids que no tienen media query específica */
+  .grid-2, .cols-2{grid-template-columns:1fr!important}
+}
+
+@media (max-width:640px){
+  /* Tipografía general un poco más chica en móvil */
+  h1{font-size:clamp(30px,8vw,42px)!important;line-height:1.05!important}
+  h2{font-size:clamp(24px,6.6vw,34px)!important;line-height:1.1!important}
+  h3{font-size:clamp(19px,5vw,24px)!important}
+
+  /* Header brand: reducir logo y tagline */
+  header.site .brand img,
+  .site-header a img[src*="akakuaa.png"]{width:46px!important;height:46px!important}
+  header.site .brand .name{font-size:20px!important}
+  header.site .brand .tag{font-size:9px!important;letter-spacing:.12em!important}
+
+  /* Breadcrumb más compacto */
+  .breadcrumb{padding:16px 18px 0!important;font-size:12.5px!important}
+
+  /* CTA sections: reducir padding interno */
+  section.cta .wrap{padding:36px 22px!important;border-radius:24px!important}
+  section.cta .buttons{flex-direction:column}
+  section.cta .btn-primary,section.cta .btn-ghost{width:100%;text-align:center}
+
+  /* Pricing note: apilar */
+  section.pricing-note .wrap{padding:22px!important;border-radius:22px!important;gap:14px!important}
+
+  /* Footer del sitio: apilar */
+  footer.site .wrap{flex-direction:column;text-align:center;gap:18px}
+  footer.site .brand{justify-content:center}
+}
+
+@media (max-width:520px){
+  /* Homepage: forzar que grids que aún no colapsan lo hagan */
+  .steps-grid{grid-template-columns:1fr!important;gap:14px!important}
+  .fv2-hang,.formas-grid,.dif-cards,.branch-grid,.hero-grid,
+  .esencia-wrap,.cv-grid,.cierre-inner,.foot-grid{grid-template-columns:1fr!important;gap:28px!important}
+  .vision-path{grid-template-columns:1fr!important;gap:20px!important}
+  .ig-grid{grid-template-columns:repeat(3,1fr)!important;gap:10px!important}
+
+  /* Padding interno de secciones */
+  section{padding-left:0;padding-right:0}
+  section > div[style*="padding"]{padding-left:18px!important;padding-right:18px!important}
+
+  /* Header padding menor */
+  header.site,.site-header{padding:10px 14px!important}
+
+  /* Hero perchero: reducir altura y overflow horizontal */
+  .perchero-box{overflow-x:hidden!important}
+  .perchero-viewport{touch-action:pan-x pan-y!important}
+
+  /* Botones tap target mínimo */
+  a[style*="padding:12px 20px"],
+  a[style*="padding:14px 26px"],
+  button{min-height:44px}
+}
+
+/* --- Iframes / mapas responsive ------------------------------ */
+iframe{max-width:100%}
+
+/* --- Sucursales: apilar el grid de sucursales ---------------- */
+@media (max-width:900px){
+  .branch-grid{grid-template-columns:1fr!important;max-width:520px;margin-left:auto;margin-right:auto}
+}
+
+/* --- FAQ / historia: tipografía y ancho ---------------------- */
+@media (max-width:640px){
+  section.contenido .grid{gap:24px!important}
+  section.contenido p, .prod__note, .prod__title{overflow-wrap:break-word}
+}
+
+/* --- Evitar que texto largo desborde ------------------------- */
+p, h1, h2, h3, h4, a, span, div, li{overflow-wrap:break-word;word-wrap:break-word}
