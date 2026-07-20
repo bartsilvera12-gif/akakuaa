@@ -1942,9 +1942,10 @@
       /* Jirafa: globo ARRIBA del animal (dentro de la cinta), punta abajo apuntando a la jirafa */
       .tip--jirafa{top:auto;bottom:calc(100% - 78% + 44px);left:6%;right:auto;transform-origin:bottom left}
       .tip--jirafa::before{left:24px;right:auto;bottom:-7px;top:auto}
-      /* Mono: globo a la izquierda del monito (dentro de .mono-wrap), viaja con él */
-      .mono-wrap .tip--mono{position:absolute;top:14%;right:calc(100% + 14px);left:auto;transform-origin:top right}
-      .mono-wrap .tip--mono::before{right:-7px;top:20px}
+      /* Mono: globo DEBAJO del monito, centrado (viaja con él al arrastrar) */
+      .mono-wrap .tip--mono{position:absolute;top:calc(100% + 12px);left:50%;right:auto;transform:translateX(-50%) translateY(6px) scale(.96);transform-origin:top center}
+      .mono-wrap .tip--mono.is-open{transform:translateX(-50%) translateY(0) scale(1)}
+      .mono-wrap .tip--mono::before{left:50%;right:auto;top:-7px;bottom:auto;margin-left:-6px}
       /* Búho: globo DEBAJO del búho (dentro de la cinta), punta arriba apuntando al búho */
       .tip--buho{top:calc(19% + 48px);left:6%;right:auto;transform-origin:top left}
       .tip--buho::before{left:24px;right:auto;top:-7px;bottom:auto}
