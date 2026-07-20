@@ -222,3 +222,102 @@ p, h1, h2, h3, h4, a, span, div, li{overflow-wrap:break-word;word-wrap:break-wor
 @media (max-width:400px){
   .mono-wrap{width:36%!important;left:32%!important}
 }
+
+/* ============================================================
+   Mascota flotante (jirafita): ocultarla en móvil.
+   En pantallas chicas ocupa demasiado espacio y tapa contenido.
+   ============================================================ */
+@media (max-width:820px){
+  .jirafita-mascota{display:none!important}
+}
+
+/* ============================================================
+   Sección "Cuidamos cada tesoro" — camino con estaciones.
+   En móvil las estaciones se posicionan absolutas y las
+   etiquetas se recortan. Las convertimos en grilla 2x2.
+   ============================================================ */
+@media (max-width:820px){
+  .dif-camino{
+    position:relative;min-height:0!important;max-width:100%!important;
+    padding:8px 4px!important;
+  }
+  .dif-camino-svg{display:none!important}
+  .dif-camino{
+    display:grid!important;
+    grid-template-columns:repeat(2,1fr)!important;
+    gap:20px 12px!important;
+  }
+  .dif-estacion{
+    position:static!important;
+    flex-direction:column!important;
+    text-align:center!important;
+    gap:8px!important;
+    animation:none!important;
+    top:auto!important;left:auto!important;bottom:auto!important;right:auto!important;
+  }
+  .dif-estacion-img{width:80px!important;height:80px!important;padding:10px!important}
+  .dif-estacion span{
+    white-space:normal!important;
+    font-size:15px!important;
+    line-height:1.2!important;
+  }
+  .dif-jirafa-wrap{
+    position:static!important;
+    transform:none!important;
+    margin:24px auto 0!important;
+    grid-column:1/-1!important;
+    left:auto!important;
+  }
+}
+
+/* ============================================================
+   Sección "Comunidad viva" — 4 sucursales.
+   Grilla 2x2 con la tarjeta al medio spanning 2 columnas.
+     [Centro] [Norte]
+     [   Tarjeta   ]
+     [  Sur  ] [Este]
+   ============================================================ */
+@media (max-width:820px){
+  .cv-scene{
+    display:grid!important;
+    grid-template-columns:1fr 1fr!important;
+    grid-template-rows:auto auto auto!important;
+    gap:14px!important;
+    min-height:0!important;
+    padding:8px 4px!important;
+  }
+  .cv-curves{display:none!important}
+  .cv-card{grid-column:1 / -1!important;grid-row:2!important;justify-self:center!important}
+  .cv-branch{
+    position:relative!important;
+    top:auto!important;left:auto!important;right:auto!important;bottom:auto!important;
+    transform:none!important;
+    margin:0!important;
+    justify-self:stretch!important;
+    animation:none!important;
+  }
+  .cv-branch--tl{grid-column:1!important;grid-row:1!important}
+  .cv-branch--tr{grid-column:2!important;grid-row:1!important}
+  .cv-branch--bl{grid-column:1!important;grid-row:3!important}
+  .cv-branch--br{grid-column:2!important;grid-row:3!important}
+}
+
+/* ============================================================
+   Puntitos del carrusel de tesoros: darles mejor look
+   ============================================================ */
+@media (max-width:640px){
+  .tesoros-dots{gap:6px!important;margin-top:4px}
+  .tesoros-dot{
+    width:8px!important;height:8px!important;
+    background:rgba(45,74,58,.22)!important;
+    transition:width .25s,background .25s!important;
+  }
+  .tesoros-dot.is-active{
+    width:22px!important;
+    border-radius:999px!important;
+    background:var(--rose)!important;
+    transform:none!important;
+  }
+  /* Si son muchos, escondemos: el swipe alcanza */
+  .tesoros-dots:has(> :nth-child(8)){display:none!important}
+}
