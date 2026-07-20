@@ -8,6 +8,17 @@
 html, body { max-width: 100%; overflow-x: hidden; }
 img, video, svg { max-width: 100%; }
 
+/* --- Botón hamburguesa del homepage: no dejar que el flex lo apachurre --- */
+header.site-header .mobile-btn{
+  flex-shrink:0!important;
+  min-width:44px;min-height:44px;
+}
+header.site-header .mobile-btn > div{gap:5px!important}
+header.site-header .mobile-btn > div > span{
+  width:22px!important;height:3px!important;background:var(--green,#2d4a3a)!important;
+  border-radius:2px;display:block;
+}
+
 /* --- Header sub-páginas: botón hamburguesa ------------------- */
 .mobile-menu-btn{
   display:none;
