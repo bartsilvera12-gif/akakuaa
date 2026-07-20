@@ -135,50 +135,58 @@ p, h1, h2, h3, h4, a, span, div, li{overflow-wrap:break-word;word-wrap:break-wor
 
 /* ============================================================
    Perchero interactivo (homepage) — modo mobile simplificado
-   El perchero decorativo se ve mal en pantallas chicas: las
-   prendas se solapan con las cards. En móvil ocultamos el
-   fondo del perchero, ocultamos las cards flotantes, y
-   mostramos las prendas como una fila horizontal con scroll.
+   En móvil convertimos el perchero decorativo en una grilla
+   uniforme de 2 columnas con todas las categorías (incluyendo
+   las que estaban absolutas: calzados y juguetes).
    ============================================================ */
 @media (max-width:720px){
-  .perchero-box{background:transparent}
-  .perchero-img{display:none!important}
-  .perchero-viewport{
-    position:relative!important;
-    left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;
-    overflow-x:auto!important;overflow-y:hidden!important;
-    -webkit-overflow-scrolling:touch;
-    scroll-snap-type:x mandatory;
-    padding:8px 12px 18px;
+  .perchero-box{
     background:transparent;
-  }
-  .perchero-track{
-    height:auto!important;
-    align-items:stretch!important;
+    display:grid!important;
+    grid-template-columns:repeat(2,1fr)!important;
     gap:12px!important;
-    padding:0!important;
+    padding:8px 14px 8px!important;
+    max-width:520px;margin:0 auto;
   }
-  .perchero-track .prenda + .prenda{margin-left:0!important}
+  .perchero-img{display:none!important}
+  /* display:contents hace que viewport/track no generen caja
+     y sus hijos participan en la grilla del perchero-box */
+  .perchero-viewport,.perchero-track{
+    display:contents!important;
+  }
   .prenda,.prenda-fija{
     position:relative!important;
     left:auto!important;right:auto!important;bottom:auto!important;top:auto!important;
     transform:none!important;
-    width:130px!important;height:auto!important;
+    width:100%!important;height:auto!important;min-width:0!important;
+    margin:0!important;
     background:#fff!important;
     border-radius:18px!important;
-    padding:14px 10px 12px!important;
+    padding:16px 10px 14px!important;
     box-shadow:0 10px 24px -14px rgba(45,74,58,.35);
     border:1px solid rgba(228,181,176,.35);
-    scroll-snap-align:start;
     flex-direction:column!important;
     align-items:center!important;
+    justify-content:flex-start!important;
+    animation:none!important;
+  }
+  .prenda:hover,.prenda:focus-visible,.prenda.is-active,
+  .prenda-fija:hover,.prenda-fija:focus-visible,.prenda-fija.is-active{
+    transform:none!important;filter:none!important;
   }
   .prenda-item{
-    width:80px!important;height:80px!important;
+    width:90px!important;height:90px!important;max-width:90px!important;
     object-fit:contain!important;
     filter:none!important;
-    margin:0 0 8px!important;
+    margin:0 auto 10px!important;
     transform:none!important;
+    animation:none!important;
+    position:static!important;
+    display:block!important;
+  }
+  .prenda:hover .prenda-item,.prenda:focus-visible .prenda-item,.prenda.is-active .prenda-item,
+  .prenda-fija:hover .prenda-item,.prenda-fija:focus-visible .prenda-item,.prenda-fija.is-active .prenda-item{
+    transform:none!important;animation:none!important;filter:none!important;
   }
   /* Card flotante en móvil: la degradamos a etiqueta debajo del ícono */
   .prenda-card{
@@ -191,12 +199,12 @@ p, h1, h2, h3, h4, a, span, div, li{overflow-wrap:break-word;word-wrap:break-wor
     gap:4px!important;
   }
   .prenda-card__chip,.prenda-card__avail,.prenda-card__cta{display:none!important}
-  .prenda-card__title{font-size:13px!important;line-height:1.15!important;text-align:center}
-  .prenda-card__cat{font-size:11px!important;text-align:center}
+  .prenda-card__title{font-size:14px!important;line-height:1.15!important;text-align:center;color:var(--green)}
+  .prenda-card__cat{font-size:11px!important;text-align:center;color:var(--text-soft)}
   /* Ocultar flechas y controles del perchero en móvil */
-  .perchero-arrow{display:none!important}
+  .perchero-arrow,.perchero-controls{display:none!important}
   /* Placeholder si no hay imagen: círculo neutro más chico */
-  .prenda-item.is-placeholder{min-height:0!important;width:70px!important;height:70px!important;border-radius:50%!important}
+  .prenda-item.is-placeholder{min-height:0!important;width:80px!important;height:80px!important;border-radius:50%!important}
 
   /* Sección esencia: imágenes decorativas rotas → ocultar */
   img[src*="public/esencia/"]{max-width:80px}
