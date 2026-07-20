@@ -25,17 +25,16 @@ header.site-header .mobile-btn > div > span{
   width:44px;height:44px;border-radius:14px;background:#fff;
   border:1px solid rgba(45,74,58,.12);
   box-shadow:0 4px 14px -6px rgba(43,35,64,.2);
+  flex-direction:column;
   align-items:center;justify-content:center;
   cursor:pointer;flex-shrink:0;padding:0;
 }
 .mobile-menu-btn span{
-  display:block;width:20px;height:2.5px;background:#2b2340;border-radius:2px;
-  position:relative;transition:transform .25s, opacity .2s;
+  display:block;width:22px;height:3px;background:var(--green,#2d4a3a);border-radius:2px;
+  transition:background .2s;
 }
 .mobile-menu-btn span + span{margin-top:4px}
-.mobile-menu-btn[aria-expanded="true"] span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
-.mobile-menu-btn[aria-expanded="true"] span:nth-child(2){opacity:0}
-.mobile-menu-btn[aria-expanded="true"] span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.mobile-menu-btn[aria-expanded="true"] span{background:var(--rose,#c98a8a)}
 
 .mobile-drawer{
   display:none;
