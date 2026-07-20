@@ -201,3 +201,16 @@ p, h1, h2, h3, h4, a, span, div, li{overflow-wrap:break-word;word-wrap:break-wor
   /* Sección esencia: imágenes decorativas rotas → ocultar */
   img[src*="public/esencia/"]{max-width:80px}
 }
+
+/* Cinta métrica (sección esencia) — monito más grande en móvil */
+@media (max-width:640px){
+  .mono-wrap{width:32%!important;left:34%!important}
+  .mono-height{font-size:12px!important;padding:3px 8px!important}
+  .hotspot--mono{width:26px!important;height:26px!important;font-size:16px!important}
+  /* La imagen de la cinta ocupa toda la columna con un tope razonable */
+  .cinta{max-width:340px!important;margin:0 auto}
+  .cinta__base{max-height:520px!important}
+}
+@media (max-width:400px){
+  .mono-wrap{width:36%!important;left:32%!important}
+}
