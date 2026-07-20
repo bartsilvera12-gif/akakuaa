@@ -54,11 +54,20 @@ header.site-header .mobile-btn > div > span{
 /* --- Breakpoints -------------------------------------------- */
 @media (max-width:960px){
   /* Mostrar botón hamburguesa en las subpáginas */
-  header.site .mobile-menu-btn{display:inline-flex}
+  header.site .mobile-menu-btn{display:inline-flex!important}
   header.site{position:relative}
   header.site .wrap{gap:12px}
-  /* Ocultar CTA "Escribinos" del header en móviles */
-  header.site .cta{display:none}
+  /* Ocultar CTA "Escribinos" del header en móviles (inline CSS lo declara
+     después, por eso necesita !important) */
+  header.site .cta,
+  header.site a.cta{display:none!important}
+}
+@media (max-width:640px){
+  /* Header más compacto en móvil */
+  header.site,header.site-header{padding:10px 14px!important}
+  header.site .brand img{width:44px!important;height:44px!important}
+  header.site .brand .name{font-size:19px!important}
+  header.site .brand .tag{display:none!important}
 }
 
 @media (max-width:820px){
