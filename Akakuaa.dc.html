@@ -3877,10 +3877,18 @@ class Component extends DCLogic {
       layer.className = 'globito-layer';
       layer.setAttribute('aria-hidden','false');
       sec.appendChild(layer);
-      // 2 globitos por sección: uno a la izq, otro a la der, a alturas distintas
-      spawn(layer, 'left',  18 + ((globalIdx*13)%25), (globalIdx%4)*0.4, globalIdx);
-      spawn(layer, 'right', 55 + ((globalIdx*17)%25), ((globalIdx+2)%4)*0.4, globalIdx+1);
-      globalIdx += 2;
+      // 5 globitos por sección, alternando lados y alturas
+      var spots = [
+        {side:'left',  top: 10 + ((globalIdx*7)%12)},
+        {side:'right', top: 22 + ((globalIdx*11)%15)},
+        {side:'left',  top: 44 + ((globalIdx*13)%14)},
+        {side:'right', top: 62 + ((globalIdx*17)%14)},
+        {side:'left',  top: 82 + ((globalIdx*19)%10)}
+      ];
+      spots.forEach(function(s, i){
+        spawn(layer, s.side, s.top, (i%4)*0.35, globalIdx + i);
+      });
+      globalIdx += spots.length;
     });
   }
 
