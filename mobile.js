@@ -14,10 +14,12 @@
     if(!drawer){
       drawer = document.createElement('div');
       drawer.className = 'mobile-drawer mobile-drawer-home';
-      drawer.style.position = 'absolute';
+      drawer.style.position = 'fixed';
       drawer.style.left = '12px';
       drawer.style.right = '12px';
-      drawer.style.top = 'calc(100% - 4px)';
+      // Se posiciona debajo del header: 14px padding + 60px logo + 14px margen
+      drawer.style.top = '88px';
+      drawer.style.zIndex = '9999';
       Array.prototype.forEach.call(nav.querySelectorAll('a'), function(a){
         var link = document.createElement('a');
         link.href = a.getAttribute('href');
