@@ -132,3 +132,72 @@ iframe{max-width:100%}
 
 /* --- Evitar que texto largo desborde ------------------------- */
 p, h1, h2, h3, h4, a, span, div, li{overflow-wrap:break-word;word-wrap:break-word}
+
+/* ============================================================
+   Perchero interactivo (homepage) — modo mobile simplificado
+   El perchero decorativo se ve mal en pantallas chicas: las
+   prendas se solapan con las cards. En móvil ocultamos el
+   fondo del perchero, ocultamos las cards flotantes, y
+   mostramos las prendas como una fila horizontal con scroll.
+   ============================================================ */
+@media (max-width:720px){
+  .perchero-box{background:transparent}
+  .perchero-img{display:none!important}
+  .perchero-viewport{
+    position:relative!important;
+    left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;
+    overflow-x:auto!important;overflow-y:hidden!important;
+    -webkit-overflow-scrolling:touch;
+    scroll-snap-type:x mandatory;
+    padding:8px 12px 18px;
+    background:transparent;
+  }
+  .perchero-track{
+    height:auto!important;
+    align-items:stretch!important;
+    gap:12px!important;
+    padding:0!important;
+  }
+  .perchero-track .prenda + .prenda{margin-left:0!important}
+  .prenda,.prenda-fija{
+    position:relative!important;
+    left:auto!important;right:auto!important;bottom:auto!important;top:auto!important;
+    transform:none!important;
+    width:130px!important;height:auto!important;
+    background:#fff!important;
+    border-radius:18px!important;
+    padding:14px 10px 12px!important;
+    box-shadow:0 10px 24px -14px rgba(45,74,58,.35);
+    border:1px solid rgba(228,181,176,.35);
+    scroll-snap-align:start;
+    flex-direction:column!important;
+    align-items:center!important;
+  }
+  .prenda-item{
+    width:80px!important;height:80px!important;
+    object-fit:contain!important;
+    filter:none!important;
+    margin:0 0 8px!important;
+    transform:none!important;
+  }
+  /* Card flotante en móvil: la degradamos a etiqueta debajo del ícono */
+  .prenda-card{
+    position:static!important;
+    opacity:1!important;visibility:visible!important;pointer-events:auto!important;
+    transform:none!important;
+    background:transparent!important;box-shadow:none!important;border:none!important;
+    padding:0!important;width:100%!important;
+    align-items:center!important;text-align:center!important;
+    gap:4px!important;
+  }
+  .prenda-card__chip,.prenda-card__avail,.prenda-card__cta{display:none!important}
+  .prenda-card__title{font-size:13px!important;line-height:1.15!important;text-align:center}
+  .prenda-card__cat{font-size:11px!important;text-align:center}
+  /* Ocultar flechas y controles del perchero en móvil */
+  .perchero-arrow{display:none!important}
+  /* Placeholder si no hay imagen: círculo neutro más chico */
+  .prenda-item.is-placeholder{min-height:0!important;width:70px!important;height:70px!important;border-radius:50%!important}
+
+  /* Sección esencia: imágenes decorativas rotas → ocultar */
+  img[src*="public/esencia/"]{max-width:80px}
+}
