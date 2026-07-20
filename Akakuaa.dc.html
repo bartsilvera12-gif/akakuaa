@@ -798,6 +798,12 @@
         .hero-collage{display:none!important}
         .hero-veil{background:linear-gradient(180deg,rgba(245,237,224,.95) 0%,rgba(245,237,224,.7) 55%,rgba(245,237,224,.25) 100%)!important}
       }
+      @media (max-width:640px){
+        /* Empuja el fondo hacia abajo asi los niños quedan al pie
+           y el boton no les tapa la cara. */
+        #inicio{background-position:center top,center 130%!important;min-height:100vh!important}
+        .hero-text{padding-bottom:180px!important}
+      }
     </style>
   </section>
 
