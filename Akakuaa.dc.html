@@ -3443,9 +3443,11 @@ class Component extends DCLogic {
       root.querySelectorAll('.fade-up').forEach(n => this._io.observe(n));
     }, 100);
 
-    // Parallax sutil del hero
+    // Parallax sutil del hero (desactivado en movil para no tapar la
+    // cara de los niños con el CTA)
     const hero = this.el && this.el.querySelector('[data-parallax="true"]');
-    if (hero && !matchMedia('(prefers-reduced-motion:reduce)').matches) {
+    const isMobile = matchMedia('(max-width:640px)').matches;
+    if (hero && !matchMedia('(prefers-reduced-motion:reduce)').matches && !isMobile) {
       let raf = 0;
       this._onScroll = () => {
         if (raf) return;
