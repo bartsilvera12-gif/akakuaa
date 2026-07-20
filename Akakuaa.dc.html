@@ -3400,9 +3400,10 @@
       </div>
       <div style="padding-top:28px;border-top:1px solid rgba(245,237,224,.15);display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;font-size:13px;color:rgba(245,237,224,.55)">
         <div>© 2026 Akakua'a · Todos los derechos reservados. <span style="color:var(--rose-soft);margin-left:8px">♥</span></div>
-        <div style="display:flex;gap:20px">
-          <a href="#" style="color:rgba(245,237,224,.55)">Políticas de privacidad</a>
+        <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:center">
+          <a href="privacidad.html" style="color:rgba(245,237,224,.55)">Políticas de privacidad</a>
           <a href="#" style="color:rgba(245,237,224,.55)">Términos</a>
+          <span style="color:rgba(245,237,224,.45)">Desarrollado por <a href="https://neura.com.py" target="_blank" rel="noopener" style="color:var(--rose-soft);font-weight:600;text-decoration:none">Neura</a></span>
         </div>
       </div>
     </div>
@@ -3681,7 +3682,7 @@ class Component extends DCLogic {
   // Mensajes que solo aparecen una vez por sesión (no vuelven al re-scrollear)
   var oneShot = { 'tesoros': true, 'diferentes': true };
   // Duraciones personalizadas por sección (ms). Si no está, usa el default.
-  var duraciones = { 'esencia': 12000, 'formas': 10000 };
+  var duraciones = { 'esencia': 6000, 'formas': 6000 };
   var alreadyShown = {};
 
   var hideTimer = null, outTimer = null;
