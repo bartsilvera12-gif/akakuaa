@@ -1515,19 +1515,8 @@
           // Marcar como playing para ocultar el botón de play overlay
           v.addEventListener('playing', function(){ a.classList.add('is-playing'); });
           v.addEventListener('pause', function(){ a.classList.remove('is-playing'); });
-          // Pausar cuando sale de vista (ahorra CPU/batería)
-          if('IntersectionObserver' in window){
-            var io = new IntersectionObserver(function(entries){
-              entries.forEach(function(e){
-                if(e.isIntersecting){
-                  var p = v.play(); if(p && p.catch) p.catch(function(){});
-                } else {
-                  v.pause();
-                }
-              });
-            }, { threshold: 0.4 });
-            io.observe(a);
-          }
+          // Marca este video como "quiero autoplay"
+          v.dataset.autoplayWanted = '1';
 
           var badge = document.createElement('span');
           badge.className = 'tesoros-badge';
@@ -1555,11 +1544,9 @@
           });
           a.appendChild(mute);
 
-          a.addEventListener('mouseenter', function(){ if(!reduce_motion) playVideo(v); });
-          a.addEventListener('mouseleave', function(){
-            if(active_video === v){ v.pause(); a.classList.remove('is-playing'); active_video = null; }
-          });
-          a.addEventListener('focusin', function(){ if(!reduce_motion) playVideo(v); });
+          // (Antes había mouseenter/mouseleave que pausaba al salir el cursor.
+           // Ahora los videos auto-reproducen cuando están visibles, así que
+           // no necesitamos los handlers de hover — el observer se encarga.)
         } else {
           var img = document.createElement('img');
           img.className = 'tesoros-media';
@@ -1713,6 +1700,19 @@
       renderChips();
       renderCards(false);
       wire();
+
+      /* Keeper de autoplay: cada 800ms revisamos los videos que deben
+         reproducirse. Cubre casos en los que el DC-runtime re-renderiza
+         la carousel y reinicia los video elements. */
+      setInterval(function(){
+        document.querySelectorAll('.tesoros-card video[data-autoplay-wanted="1"]').forEach(function(v){
+          if(v.paused){
+            v.muted = true; // autoplay requires muted
+            var p = v.play();
+            if(p && p.catch) p.catch(function(){});
+          }
+        });
+      }, 800);
     })();
     </script>
   </section>
