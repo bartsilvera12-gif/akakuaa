@@ -421,7 +421,7 @@
   <header class="site-header" style="position:sticky;top:0;z-index:50;padding:14px 20px;background-color:var(--cream);border-bottom:1px solid rgba(45,74,58,0.1)">
     <div style="max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:24px">
       <a href="#inicio" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit">
-        <img src="uploads/akakuaa.png" alt="Akakua'a" style="width:60px;height:60px;object-fit:contain;flex-shrink:0">
+        <img src="uploads/akakuaa.png" alt="Akakua'a" width="60" height="60" fetchpriority="high" decoding="async" style="width:60px;height:60px;object-fit:contain;flex-shrink:0">
         <div>
           <div class="brand-title" style="font-family:'Fraunces',serif;font-weight:700;font-size:26px;line-height:1;letter-spacing:-.02em">
             <span style="color:var(--green)">akaku</span><span style="color:var(--rose)">a'a</span>
@@ -850,7 +850,7 @@
     <div class="perchero-stage" style="max-width:1500px;margin:0 auto;padding:0 20px;position:relative;z-index:2">
       <div class="perchero-box" role="region" aria-label="Perchero de categorías">
         <!-- Imagen base del perchero (fija, no se mueve) -->
-        <img class="perchero-img" src="uploads/perchero-akakuaa-transparente.webp" alt="" aria-hidden="true" draggable="false">
+        <img class="perchero-img" src="uploads/perchero-akakuaa-transparente.webp" alt="" aria-hidden="true" draggable="false" loading="lazy" decoding="async">
 
         <!-- Viewport con scroll horizontal (solo las prendas se mueven) -->
         <div class="perchero-viewport" id="percheroViewport">
@@ -1818,7 +1818,7 @@
 
       <!-- Columna derecha: cinta métrica interactiva -->
       <div class="cinta" id="esenciaCinta">
-        <img class="cinta__base" src="uploads/cinta-metrica-jirafa-buho.png" alt="Cinta métrica con jirafita y búho de Akakua'a" draggable="false">
+        <img class="cinta__base" src="uploads/cinta-metrica-jirafa-buho.png" alt="Cinta métrica con jirafita y búho de Akakua'a" draggable="false" loading="lazy" decoding="async">
 
         <!-- Hotspot: Búho (sobre el búho de la rama) -->
         <button type="button" class="hotspot hotspot--buho" data-key="buho"
@@ -1847,7 +1847,7 @@
              aria-label="Arrastrá al monito para medir su altura"
              aria-valuemin="20" aria-valuemax="140" aria-valuenow="90"
              tabindex="0">
-          <img class="mono-img" src="uploads/monito-interactivo-akakuaa.png" alt="Monito interactivo trepando la cinta métrica" draggable="false">
+          <img class="mono-img" src="uploads/monito-interactivo-akakuaa.png" alt="Monito interactivo trepando la cinta métrica" draggable="false" loading="lazy" decoding="async">
           <button type="button" class="hotspot hotspot--mono" data-key="mono"
                   aria-expanded="false" aria-controls="tip-mono"
                   aria-label="Descubrir la etapa de los zapatitos">
@@ -3230,7 +3230,7 @@
           <div class="cierre-logo">
             <span class="cierre-logo__halo" aria-hidden="true"></span>
             <span class="cierre-logo__anillo" aria-hidden="true"></span>
-            <img src="uploads/akakuaa.png" alt="Akakua'a — mamá elefante acompañando a su bebé">
+            <img src="uploads/akakuaa.png" alt="Akakua'a — mamá elefante acompañando a su bebé" loading="lazy" decoding="async">
           </div>
           <p class="cierre-firma">acompañando<br><em>desde el primer día</em></p>
         </div>
@@ -3367,7 +3367,7 @@
       <div style="display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;margin-bottom:56px" class="foot-grid">
         <div>
           <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px">
-            <img src="uploads/akakuaa.png" alt="Akakua'a" style="width:64px;height:64px;object-fit:contain">
+            <img src="uploads/akakuaa.png" alt="Akakua'a" width="64" height="64" loading="lazy" decoding="async" style="width:64px;height:64px;object-fit:contain">
             <div>
               <div style="font-family:'Fraunces',serif;font-weight:700;font-size:24px;line-height:1;color:var(--cream)">akakua'a</div>
               <div style="font-size:10.5px;color:var(--rose-soft);letter-spacing:.14em;text-transform:uppercase;margin-top:4px;font-style:italic;font-family:'Fraunces',serif">porque crecer pide cambios</div>
@@ -3663,7 +3663,7 @@ class Component extends DCLogic {
   <div class="jirafita-globo" id="jirafita-globo">¡Hola! Te acompaño a conocer Akakua'a.</div>
   <div class="jirafita-wrap">
     <button class="jirafita-min-btn" id="jirafita-min" aria-label="Minimizar mascota" title="Minimizar">−</button>
-    <img class="jirafita-img" id="jirafita-img" src="/jirafita-akakuaa-bufanda-rosada.webp" alt="Jirafita Akakua'a" onerror="this.onerror=null;this.src='uploads/jirafita-akakuaa.webp'">
+    <img class="jirafita-img" id="jirafita-img" src="/jirafita-akakuaa-bufanda-rosada.webp" alt="Jirafita Akakua'a" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='uploads/jirafita-akakuaa.webp'">
   </div>
   <button class="jirafita-cabeza" id="jirafita-restore" aria-label="Mostrar mascota">
     <img src="/jirafita-akakuaa-bufanda-rosada.webp" alt="" onerror="this.onerror=null;this.src='uploads/jirafita-akakuaa.webp'">
