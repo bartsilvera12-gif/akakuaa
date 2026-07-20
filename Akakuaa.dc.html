@@ -1939,16 +1939,16 @@
       .tip__title{font-family:'Fraunces',serif;font-style:italic;font-weight:700;color:var(--green);font-size:16px;line-height:1.2;margin:2px 0 6px;letter-spacing:-.01em}
       .tip__body{font-size:13.5px;line-height:1.5;color:var(--text-soft);margin:0}
 
-      /* Jirafa: globo ARRIBA del animal (dentro de la cinta), punta abajo apuntando a la jirafa */
-      .tip--jirafa{top:auto;bottom:calc(100% - 78% + 44px);left:6%;right:auto;transform-origin:bottom left}
-      .tip--jirafa::before{left:24px;right:auto;bottom:-7px;top:auto}
-      /* Mono: globo DEBAJO del monito, centrado (viaja con él al arrastrar) */
-      .mono-wrap .tip--mono{position:absolute;top:calc(100% + 12px);left:50%;right:auto;transform:translateX(-50%) translateY(6px) scale(.96);transform-origin:top center}
-      .mono-wrap .tip--mono.is-open{transform:translateX(-50%) translateY(0) scale(1)}
-      .mono-wrap .tip--mono::before{left:50%;right:auto;top:-7px;bottom:auto;margin-left:-6px}
-      /* Búho: globo DEBAJO del búho (dentro de la cinta), punta arriba apuntando al búho */
-      .tip--buho{top:calc(19% + 48px);left:6%;right:auto;transform-origin:top left}
-      .tip--buho::before{left:24px;right:auto;top:-7px;bottom:auto}
+      /* --- Desktop: globos a la IZQUIERDA del animal, con punta apuntando a la derecha --- */
+      /* Jirafa (hotspot en 28% left, 78% top) */
+      .tip--jirafa{top:calc(78% - 40px);right:calc(100% - 28% + 14px);left:auto;transform-origin:top right}
+      .tip--jirafa::before{right:-7px;left:auto;top:24px;bottom:auto}
+      /* Búho (hotspot en 36% left, 19% top) */
+      .tip--buho{top:calc(19% - 8px);right:calc(100% - 36% + 14px);left:auto;transform-origin:top right}
+      .tip--buho::before{right:-7px;left:auto;top:24px;bottom:auto}
+      /* Mono: globo a la izquierda del monito (dentro de .mono-wrap), viaja con él */
+      .mono-wrap .tip--mono{position:absolute;top:14%;right:calc(100% + 14px);left:auto;transform-origin:top right}
+      .mono-wrap .tip--mono::before{right:-7px;left:auto;top:20px;bottom:auto}
 
       /* Hint debajo */
       .esencia-hint{max-width:1200px;margin:34px auto 0;padding:0 20px;text-align:center;color:var(--green);font-family:'Fraunces',serif;font-style:italic;font-weight:600;font-size:15.5px;display:flex;align-items:center;justify-content:center;gap:8px}
@@ -1964,6 +1964,15 @@
         .tip__title{font-size:15px}
         .tip__body{font-size:13px}
         .hotspot{width:28px;height:28px;font-size:18px}
+        /* En móvil los globos van DENTRO de la cinta (arriba/abajo del animal)
+           para no salirse del viewport, que tiene overflow-x:hidden. */
+        .tip--jirafa{top:auto;bottom:calc(100% - 78% + 44px);left:6%;right:auto;transform-origin:bottom left}
+        .tip--jirafa::before{left:24px;right:auto;bottom:-7px;top:auto}
+        .tip--buho{top:calc(19% + 48px);left:6%;right:auto;transform-origin:top left}
+        .tip--buho::before{left:24px;right:auto;top:-7px;bottom:auto}
+        .mono-wrap .tip--mono{top:calc(100% + 12px);left:50%;right:auto;transform:translateX(-50%) translateY(6px) scale(.96);transform-origin:top center}
+        .mono-wrap .tip--mono.is-open{transform:translateX(-50%) translateY(0) scale(1)}
+        .mono-wrap .tip--mono::before{left:50%;right:auto;top:-7px;bottom:auto;margin-left:-6px}
       }
       @media (prefers-reduced-motion:reduce){
         .cinta__mono,.hotspot,.tip{animation:none!important;transition:none!important;transform:none!important}
@@ -3878,8 +3887,12 @@ class Component extends DCLogic {
       layer.className = 'globito-layer';
       layer.setAttribute('aria-hidden','false');
       sec.appendChild(layer);
-      // 5 globitos por sección, alternando lados y alturas
-      var spots = [
+      // Menos globitos en móvil (2) que en desktop (5) para no saturar
+      var isMobile = window.matchMedia('(max-width:640px)').matches;
+      var spots = isMobile ? [
+        {side:'left',  top: 20 + ((globalIdx*7)%20)},
+        {side:'right', top: 60 + ((globalIdx*11)%20)}
+      ] : [
         {side:'left',  top: 10 + ((globalIdx*7)%12)},
         {side:'right', top: 22 + ((globalIdx*11)%15)},
         {side:'left',  top: 44 + ((globalIdx*13)%14)},
@@ -3890,6 +3903,18 @@ class Component extends DCLogic {
         spawn(layer, s.side, s.top, (i%4)*0.35, globalIdx + i);
       });
       globalIdx += spots.length;
+      // Pausar animaciones cuando la sección no está visible (ahorra CPU/batería)
+      if('IntersectionObserver' in window){
+        var vo = new IntersectionObserver(function(entries){
+          entries.forEach(function(en){
+            layer.style.animationPlayState = en.isIntersecting ? 'running' : 'paused';
+            layer.querySelectorAll('.globito').forEach(function(g){
+              g.style.animationPlayState = en.isIntersecting ? 'running' : 'paused';
+            });
+          });
+        }, { rootMargin: '100px' });
+        vo.observe(sec);
+      }
     });
   }
 
