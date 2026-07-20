@@ -1648,11 +1648,13 @@
         if(_wired) return;
         _wired = true;
 
-        arrows.forEach(function(btn){
-          btn.addEventListener('click', function(){
-            var dir = btn.getAttribute('data-dir') === '-1' ? -1 : 1;
-            track.scrollBy({ left: dir * pageWidth(), behavior: reduce_motion ? 'auto' : 'smooth' });
-          });
+        // Delegación: sobrevive a re-renders del DC-runtime
+        section.addEventListener('click', function(ev){
+          var btn = ev.target.closest && ev.target.closest('.tesoros-arrow');
+          if(!btn || !section.contains(btn)) return;
+          ev.preventDefault();
+          var dir = btn.getAttribute('data-dir') === '-1' ? -1 : 1;
+          track.scrollBy({ left: dir * pageWidth(), behavior: reduce_motion ? 'auto' : 'smooth' });
         });
 
         track.addEventListener('scroll', function(){ updateDots(); updateArrows(); }, { passive: true });
@@ -3900,7 +3902,6 @@ class Component extends DCLogic {
       if(cs.display === 'none') return;
       if(sec.id === 'inicio') return;
       if(sec.id === 'cta') return; // el cierre ya tiene su propia decoración
-      if(sec.id === 'tesoros' || sec.id === 'recibimos') return; // no tapar flechas/videos
       // Evitar duplicados si ya se inicializó esta sección
       if(sec.querySelector(':scope > .globito-layer')) return;
       var layer = document.createElement('div');
