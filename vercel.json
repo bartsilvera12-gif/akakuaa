@@ -1,6 +1,4 @@
 {
-  "rewrites": [
-    { "source": "/", "destination": "/Akakuaa.dc.html" }
-  ],
-  "cleanUrls": true
+  "cleanUrls": false,
+  "trailingSlash": false
 }
