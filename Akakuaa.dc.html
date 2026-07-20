@@ -423,10 +423,10 @@
       <a href="#inicio" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit">
         <img src="uploads/akakuaa.png" alt="Akakua'a" style="width:60px;height:60px;object-fit:contain;flex-shrink:0">
         <div>
-          <div style="font-family:'Fraunces',serif;font-weight:700;font-size:26px;line-height:1;letter-spacing:-.02em">
+          <div class="brand-title" style="font-family:'Fraunces',serif;font-weight:700;font-size:26px;line-height:1;letter-spacing:-.02em">
             <span style="color:var(--green)">akaku</span><span style="color:var(--rose)">a'a</span>
           </div>
-          <div style="font-size:10px;color:var(--rose);letter-spacing:.18em;text-transform:uppercase;margin-top:4px;font-style:italic;font-family:'Fraunces',serif">porque crecer pide cambios</div>
+          <div class="brand-tag" style="font-size:10px;color:var(--rose);letter-spacing:.18em;text-transform:uppercase;margin-top:4px;font-style:italic;font-family:'Fraunces',serif">porque crecer pide cambios</div>
         </div>
       </a>
       <nav style="display:flex;align-items:center;gap:4px" class="desktop-nav">
@@ -465,6 +465,10 @@
       }
       @media (max-width:640px){
         .header-cta-label{display:none}
+        .site-header{padding:10px 14px!important}
+        .site-header .brand-title{font-size:20px!important}
+        .site-header .brand-tag{font-size:8.5px!important;letter-spacing:.14em!important;margin-top:2px!important}
+        .site-header img[alt="Akakua'a"]{width:44px!important;height:44px!important}
       }
     </style>
   </header>
@@ -3890,8 +3894,7 @@ class Component extends DCLogic {
       // Menos globitos en móvil (2) que en desktop (5) para no saturar
       var isMobile = window.matchMedia('(max-width:640px)').matches;
       var spots = isMobile ? [
-        {side:'left',  top: 20 + ((globalIdx*7)%20)},
-        {side:'right', top: 60 + ((globalIdx*11)%20)}
+        {side: (globalIdx%2===0 ? 'right' : 'left'), top: 40 + ((globalIdx*11)%25)}
       ] : [
         {side:'left',  top: 15 + ((globalIdx*7)%14)},
         {side:'right', top: 42 + ((globalIdx*13)%16)},
