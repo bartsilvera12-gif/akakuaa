@@ -799,10 +799,16 @@
         .hero-veil{background:linear-gradient(180deg,rgba(245,237,224,.95) 0%,rgba(245,237,224,.7) 55%,rgba(245,237,224,.25) 100%)!important}
       }
       @media (max-width:640px){
-        /* Empuja el fondo hacia abajo asi los niños quedan al pie
-           y el boton no les tapa la cara. */
-        #inicio{background-position:center top,center 130%!important;min-height:100vh!important}
-        .hero-text{padding-bottom:180px!important}
+        /* Achica y ancla la imagen al pie de la seccion asi los niños
+           quedan claramente debajo del CTA. */
+        #inicio{
+          background-image:linear-gradient(180deg,rgba(240,234,221,.85) 0%,rgba(240,234,221,.55) 30%,rgba(240,234,221,0) 55%,rgba(240,234,221,.6) 96%,#F0EADD 100%),url('uploads/fondo-hero-akakuaa-paisaje.webp')!important;
+          background-size:100% 100%,auto 55%!important;
+          background-position:center center,center bottom!important;
+          background-repeat:no-repeat,no-repeat!important;
+          min-height:92vh!important;
+        }
+        .hero-text{padding:24px 20px 40px!important}
       }
     </style>
   </section>
