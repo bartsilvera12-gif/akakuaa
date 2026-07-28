@@ -361,7 +361,7 @@
     <img src="uploads/hero3.png" alt="" aria-hidden="true" fetchpriority="high" decoding="async" class="hero-v3-bg">
     <div class="hero-v3-grid">
       <!-- Columna izquierda: texto (superpuesto sobre la zona vacía de la foto) -->
-      <div class="hero-v3-text">
+      <div class="hero-v3-text hero-anim">
         <!-- Marca chica: elefantes + wordmark + tagline -->
         <a href="#inicio" class="hero-v3-brand" aria-label="Akakua'a">
           <img src="uploads/akakuaa.png" alt="" fetchpriority="high" decoding="async" class="hero-v3-brand-icon">
@@ -429,7 +429,21 @@
 
     <style>
       .hero-v3{position:relative;min-height:min(90vh,820px);display:flex;align-items:center}
-      .hero-v3-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:right bottom;z-index:0;pointer-events:none;user-select:none}
+      /* Animación de entrada del hero: fade + slide escalonado (GPU-friendly) */
+      @keyframes heroIn{from{opacity:0;transform:translate3d(0,16px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
+      .hero-anim > *{opacity:0;will-change:opacity,transform;animation:heroIn .55s ease-out both}
+      .hero-anim > *:nth-child(1){animation-delay:.05s}
+      .hero-anim > *:nth-child(2){animation-delay:.13s}
+      .hero-anim > *:nth-child(3){animation-delay:.21s}
+      .hero-anim > *:nth-child(4){animation-delay:.29s}
+      .hero-anim > *:nth-child(5){animation-delay:.37s}
+      .hero-anim > *:nth-child(6){animation-delay:.45s}
+      .hero-anim > *:nth-child(7){animation-delay:.53s}
+      .hero-anim > *:nth-child(n+8){animation-delay:.61s}
+      @media (prefers-reduced-motion:reduce){
+        .hero-anim > *{animation:none;opacity:1}
+      }
+      .hero-v3-bg{position:absolute;top:0;right:0;bottom:0;left:0;width:100%;height:100%;object-fit:cover;object-position:right 15%;z-index:0;pointer-events:none;user-select:none}
       .hero-v3-grid{position:relative;z-index:2;width:100%;max-width:1400px;margin:0 auto;padding:32px 0}
       .hero-v3-text{padding:48px 64px 48px 56px;position:relative;display:flex;flex-direction:column;justify-content:center;max-width:620px;isolation:isolate}
       .hero-v3-text::before{content:"";position:absolute;inset:-40px -100px -40px -120px;background:radial-gradient(ellipse 65% 70% at 42% 50%, rgba(245,238,224,.82) 0%, rgba(245,238,224,.58) 40%, rgba(245,238,224,.28) 65%, transparent 88%);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);-webkit-mask-image:radial-gradient(ellipse 65% 70% at 42% 50%, #000 0%, #000 45%, rgba(0,0,0,.55) 68%, transparent 92%);mask-image:radial-gradient(ellipse 65% 70% at 42% 50%, #000 0%, #000 45%, rgba(0,0,0,.55) 68%, transparent 92%);z-index:-1;pointer-events:none}
@@ -1713,20 +1727,7 @@
     <div style="max-width:1240px;margin:0 auto">
       <header style="text-align:center;max-width:1000px;margin:0 auto 72px">
         <div style="font-family:'Nunito',sans-serif;font-weight:700;font-size:13.5px;letter-spacing:.32em;text-transform:uppercase;color:var(--rose);margin-bottom:22px">Opiniones</div>
-        <h2 style="font-family:'Fraunces',serif;font-weight:700;font-size:clamp(34px,4.4vw,60px);line-height:1.05;letter-spacing:-.03em;color:var(--green);margin:0 0 40px">Lo que dicen las <em style="font-style:italic;color:var(--rose);font-weight:700">familias</em>.</h2>
-        <div style="display:inline-flex;align-items:center;gap:24px;padding:24px 40px;background:var(--sage);border-radius:24px;box-shadow:0 14px 36px -18px rgba(45,74,58,.28)">
-          <div style="font-family:'Fraunces',serif;font-weight:700;font-size:56px;line-height:1;color:var(--green);letter-spacing:-.03em">4,9</div>
-          <div style="text-align:left">
-            <span style="display:inline-flex;gap:3px;color:#f5b400;margin-bottom:6px">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1l3 7 8 1-6 5 2 9-7-4-7 4 2-9-6-5 8-1z"/></svg>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1l3 7 8 1-6 5 2 9-7-4-7 4 2-9-6-5 8-1z"/></svg>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1l3 7 8 1-6 5 2 9-7-4-7 4 2-9-6-5 8-1z"/></svg>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1l3 7 8 1-6 5 2 9-7-4-7 4 2-9-6-5 8-1z"/></svg>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1l3 7 8 1-6 5 2 9-7-4-7 4 2-9-6-5 8-1z"/></svg>
-            </span>
-            <div style="font-family:'Nunito',sans-serif;font-weight:700;font-size:15px;color:var(--green);letter-spacing:.02em">en Google &middot; +180 reseñas</div>
-          </div>
-        </div>
+        <h2 style="font-family:'Fraunces',serif;font-weight:700;font-size:clamp(34px,4.4vw,60px);line-height:1.05;letter-spacing:-.03em;color:var(--green);margin:0">Lo que dicen las <em style="font-style:italic;color:var(--rose);font-weight:700">familias</em>.</h2>
       </header>
       <div class="op-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px">
         <article style="background:#fff;border-radius:24px;padding:44px 36px;box-shadow:0 14px 36px -22px rgba(45,74,58,.24);display:flex;flex-direction:column;gap:22px">
@@ -2239,6 +2240,94 @@ class Component extends DCLogic {
     };
   }
 }
+</script>
+
+<!-- ============ SCROLL REVEAL ANIMATIONS ============ -->
+<style>
+  /* Estado inicial: elementos ocultos y desplazados */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1);will-change:opacity,transform}
+  .reveal.is-in{opacity:1;transform:translateY(0)}
+  /* Stagger para hijos (cuando el contenedor entra, los hijos aparecen escalonados) */
+  .reveal[data-stagger] > *{opacity:0;transform:translateY(20px);transition:opacity .6s cubic-bezier(.22,.61,.36,1),transform .6s cubic-bezier(.22,.61,.36,1)}
+  .reveal[data-stagger].is-in > *{opacity:1;transform:translateY(0)}
+  .reveal[data-stagger].is-in > *:nth-child(1){transition-delay:.05s}
+  .reveal[data-stagger].is-in > *:nth-child(2){transition-delay:.12s}
+  .reveal[data-stagger].is-in > *:nth-child(3){transition-delay:.19s}
+  .reveal[data-stagger].is-in > *:nth-child(4){transition-delay:.26s}
+  .reveal[data-stagger].is-in > *:nth-child(5){transition-delay:.33s}
+  .reveal[data-stagger].is-in > *:nth-child(6){transition-delay:.40s}
+  .reveal[data-stagger].is-in > *:nth-child(7){transition-delay:.47s}
+  .reveal[data-stagger].is-in > *:nth-child(n+8){transition-delay:.54s}
+  /* Respeta preferencia de reducir movimiento */
+  @media (prefers-reduced-motion:reduce){
+    .reveal,.reveal[data-stagger] > *{opacity:1!important;transform:none!important;transition:none!important}
+  }
+</style>
+<script>
+(function(){
+  var SKIP_IDS = {};
+
+  // Marcado especial del hero: hijos del bloque de texto con stagger
+  var heroText = document.querySelector('.hero-v3-text');
+  if (heroText && !heroText.classList.contains('reveal')){
+    heroText.classList.add('reveal');
+    heroText.setAttribute('data-stagger','');
+    SKIP_IDS['inicio'] = 1;
+  }
+
+  // Marca automáticamente elementos para animar
+  function markReveal(){
+    var sections = document.querySelectorAll('section[id]');
+    sections.forEach(function(sec){
+      if (SKIP_IDS[sec.id]) return;
+      // Encabezado de sección (header o primer h2 y su copy vecino) → aparece como bloque
+      var header = sec.querySelector('header');
+      if (header && !header.classList.contains('reveal')) header.classList.add('reveal');
+      // Grillas / listas de cards → stagger de hijos
+      var groups = sec.querySelectorAll('ul, ol, .cat-grid, [class*="grid"], [class*="cards"], [class*="steps"]');
+      groups.forEach(function(g){
+        if (g.children.length > 1 && !g.classList.contains('reveal')){
+          g.classList.add('reveal');
+          g.setAttribute('data-stagger','');
+        }
+      });
+      // Sección en sí si no marcamos nada dentro → reveal completo
+      if (!sec.querySelector('.reveal')){
+        sec.classList.add('reveal');
+      }
+    });
+    // Footer también
+    var footer = document.querySelector('footer');
+    if (footer && !footer.classList.contains('reveal')) footer.classList.add('reveal');
+  }
+
+  // Observa y activa
+  function activate(){
+    var els = document.querySelectorAll('.reveal:not(.is-in)');
+    if (!('IntersectionObserver' in window)){
+      els.forEach(function(el){ el.classList.add('is-in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){
+          e.target.classList.add('is-in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    els.forEach(function(el){ io.observe(el); });
+  }
+
+  function boot(){ markReveal(); activate(); }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+
+  // Re-escanear si el runtime DC re-renderiza tarde
+  var tries = 0;
+  var iv = setInterval(function(){ boot(); if (++tries > 8) clearInterval(iv); }, 400);
+})();
 </script>
 
 
